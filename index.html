@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -16,56 +16,102 @@
 
   <header class="navbar" id="navbar" role="banner">
     <div class="container navbar__inner">
-      <a href="index.html" class="navbar__logo" aria-label="GreenDome Travel & Tours — Home">
-        <img src="assets/images/logo.png" alt="GreenDome Travel & Tours" class="navbar__logo-img" width="160" height="52">
-      </a>
-      <nav class="navbar__nav" id="nav-menu" aria-label="Main navigation">
-        <ul class="navbar__links">
-          <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
-          <li><a href="umrah.html" class="nav-link" data-page="umrah">Umrah Packages</a></li>
-          <li><a href="international.html" class="nav-link" data-page="international">International</a></li>
-          <li><a href="domestic.html" class="nav-link" data-page="domestic">Domestic</a></li>
-          <li><a href="about.html" class="nav-link" data-page="about">About</a></li>
-          <li><a href="contact.html" class="nav-link" data-page="contact">Contact</a></li>
-        </ul>
+      <div class="navbar__island" id="nav-menu">
+        <a href="index.html" class="navbar__logo" aria-label="GreenDome Travel & Tours — Home">
+          <img src="assets/images/logo.png" alt="GreenDome Travel & Tours" class="navbar__logo-img" width="160" height="52">
+        </a>
+        <nav class="navbar__nav" aria-label="Main navigation">
+          <ul class="navbar__links">
+            <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
+            <li><a href="umrah.html" class="nav-link" data-page="umrah">Umrah Packages</a></li>
+            <li><a href="international.html" class="nav-link" data-page="international">International</a></li>
+            <li><a href="domestic.html" class="nav-link" data-page="domestic">Domestic</a></li>
+            <li><a href="about.html" class="nav-link" data-page="about">About</a></li>
+            <li><a href="contact.html" class="nav-link" data-page="contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a href="umrah.html" class="btn btn--primary btn--sm navbar__cta">Book Now</a>
         <a href="umrah.html" class="btn btn--primary btn--sm navbar__cta-mobile">Book Now</a>
-      </nav>
-      <a href="umrah.html" class="btn btn--primary btn--sm navbar__cta">Book Now</a>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
-        <span class="hamburger__line"></span>
-        <span class="hamburger__line"></span>
-        <span class="hamburger__line"></span>
-      </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="hero" id="home">
-      <div class="hero__blob" aria-hidden="true"></div>
-      <div class="container hero__inner">
+    <section class="hero hero--banner" id="home">
+      <img class="hero__bg" src="assets/images/kaaba.jpg" alt="" width="1920" height="1080" loading="eager" aria-hidden="true">
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="container hero__banner-wrap">
         <div class="hero__content reveal">
-          <p class="section-label">/// YOUR JOURNEY TO THE HOLY LAND STARTS HERE</p>
-          <h1 class="hero__title">
-            Spiritual Journey with<br><span class="text-primary">GreenDome</span>
+          <p class="hero__label">/// YOUR JOURNEY TO THE HOLY LAND STARTS HERE</p>
+          <h1 class="hero__title hero__title--banner">
+            Your Spiritual Journey<br>Starts With <span class="hero__title-accent">Green Dome</span>
           </h1>
-          <p class="hero__subtext">
+          <p class="hero__subtext hero__subtext--light">
             Pakistan's trusted Umrah &amp; travel specialists. Group packages, premium
             facilities, and seamless journeys — every step of the way.
           </p>
           <div class="hero__actions">
-            <a href="umrah.html" class="btn btn--primary">Explore Umrah Packages</a>
-            <a href="contact.html" class="btn btn--outline">Get a Free Consultation</a>
+            <a href="umrah.html" class="btn btn--gold">Explore Umrah Packages</a>
+            <a href="contact.html" class="btn btn--outline-light">Get a Free Consultation</a>
           </div>
-          <div class="hero__trust">
-            <span class="trust-item"><span class="trust-dot"></span>500+ Pilgrims Served</span>
-            <span class="trust-item"><span class="trust-dot"></span>IATA Certified</span>
-            <span class="trust-item"><span class="trust-dot"></span>Government Approved</span>
+          <div class="hero__trust hero__trust--banner">
+            <span class="trust-badge">
+              <span class="material-icons" aria-hidden="true">verified</span>
+              IATA Certified
+            </span>
+            <span class="trust-badge">
+              <span class="material-icons" aria-hidden="true">account_balance</span>
+              Govt Approved
+            </span>
+            <span class="trust-badge">
+              <span class="material-icons" aria-hidden="true">groups</span>
+              500+ Pilgrims Served
+            </span>
           </div>
         </div>
-        <div class="hero__image reveal">
-          <img src="assets/images/kaaba.jpg" alt="View of the Kaaba in Makkah, Saudi Arabia" width="600" height="400" loading="eager">
+
+        <div class="hero-inquiry reveal">
+          <div class="hero-inquiry__tabs" role="tablist" aria-label="Inquiry type">
+            <button type="button" class="hero-inquiry__tab active" role="tab" aria-selected="true" data-form-type="Umrah Inquiry">Umrah Inquiry</button>
+            <button type="button" class="hero-inquiry__tab" role="tab" aria-selected="false" data-form-type="International Inquiry">International</button>
+            <button type="button" class="hero-inquiry__tab" role="tab" aria-selected="false" data-form-type="Domestic Inquiry">Domestic</button>
+          </div>
+          <form class="hero-inquiry-form inquiry-form" id="hero-inquiry-form" data-form-type="Umrah Inquiry" data-form-variant="banner" novalidate>
+            <input type="hidden" name="formType" value="Umrah Inquiry">
+            <div class="hero-inquiry__fields">
+              <div class="hero-inquiry__field">
+                <label for="hero-name">Full Name</label>
+                <input type="text" id="hero-name" name="fullName" placeholder="Your Name" required aria-required="true">
+              </div>
+              <div class="hero-inquiry__field">
+                <label for="hero-phone">Phone Number</label>
+                <input type="tel" id="hero-phone" name="phone" placeholder="+92 3XX XXXXXXX" required aria-required="true">
+              </div>
+              <div class="hero-inquiry__field">
+                <label for="hero-travelers">Travelers</label>
+                <select id="hero-travelers" name="travelers" required aria-required="true">
+                  <option value="1-3 People">1-3 People</option>
+                  <option value="4-6 People">4-6 People</option>
+                  <option value="7-10 People">7-10 People</option>
+                  <option value="10+ People">10+ People</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn--primary hero-inquiry__submit">
+                Submit Request
+                <span class="material-icons" aria-hidden="true">arrow_forward</span>
+              </button>
+            </div>
+            <p class="form-error hero-inquiry__error" role="alert" hidden>Something went wrong. Please WhatsApp us directly.</p>
+          </form>
         </div>
       </div>
+
       <div class="marquee" aria-hidden="true">
         <div class="marquee__track">
           <span class="marquee__content">Umrah · Hajj Groups · Saudi Visa · International Tours · Domestic Travel · Hotel Bookings · Flight Ticketing ·</span>
@@ -145,44 +191,56 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section section--travel-partner" id="travel-partner">
       <div class="container">
-        <div class="section-header reveal">
-          <p class="section-label">/// WHAT WE OFFER</p>
-          <h2 class="section-title">Your Complete Travel Partner.</h2>
-          <p class="section-subtext">From sacred journeys to global adventures and Pakistan's hidden gems — we handle every detail.</p>
+        <div class="travel-partner__header reveal">
+          <div class="travel-partner__header-text">
+            <p class="section-label">/// EXPLORATION &amp; DISCOVERY</p>
+            <h2 class="section-title">Your Complete Travel Partner.</h2>
+            <p class="section-subtext">From sacred journeys to global adventures and Pakistan's hidden gems — we handle every detail with premium precision.</p>
+          </div>
+          <div class="travel-partner__nav" aria-hidden="false">
+            <button type="button" class="travel-partner__arrow travel-partner__arrow--prev" id="travel-partner-prev" aria-label="Previous destinations">
+              <span class="material-icons" aria-hidden="true">chevron_left</span>
+            </button>
+            <button type="button" class="travel-partner__arrow travel-partner__arrow--next" id="travel-partner-next" aria-label="Next destinations">
+              <span class="material-icons" aria-hidden="true">chevron_right</span>
+            </button>
+          </div>
         </div>
-        <div class="services-overview">
-          <a href="umrah.html" class="service-card reveal">
-            <div class="service-card__image">
-              <img src="assets/images/kaaba.jpg" alt="View of the Kaaba in Makkah, Saudi Arabia" width="600" height="375" loading="lazy">
-            </div>
-            <div class="service-card__body">
-              <h3 class="service-card__title">Umrah Group Packages</h3>
-              <p class="service-card__desc">All-inclusive packages from Karachi — visa, flights, hotels near Haram, and guided ziyarat.</p>
-              <span class="service-card__link">View Packages →</span>
-            </div>
-          </a>
-          <a href="international.html" class="service-card reveal">
-            <div class="service-card__image">
-              <img src="assets/images/dubai.jpg" alt="Dubai skyline at sunset" width="600" height="375" loading="lazy">
-            </div>
-            <div class="service-card__body">
-              <h3 class="service-card__title">International Travel</h3>
-              <p class="service-card__desc">Dubai, Turkey, Europe, Southeast Asia — custom itineraries with visa and tour support.</p>
-              <span class="service-card__link">Explore Destinations →</span>
-            </div>
-          </a>
-          <a href="domestic.html" class="service-card reveal">
-            <div class="service-card__image">
-              <img src="assets/images/hunza.jpg" alt="Mountain landscape in northern Pakistan" width="600" height="375" loading="lazy">
-            </div>
-            <div class="service-card__body">
-              <h3 class="service-card__title">Domestic Pakistan Tours</h3>
-              <p class="service-card__desc">Hunza, Swat, Lahore, Gwadar — guided group tours across Pakistan's most beautiful regions.</p>
-              <span class="service-card__link">Discover Pakistan →</span>
-            </div>
-          </a>
+        <div class="travel-partner__slider reveal">
+          <div class="travel-partner__track" id="travel-partner-track">
+            <a href="international.html" class="travel-card">
+              <img class="travel-card__bg" src="assets/images/europe.jpg" alt="European city skyline at dusk" width="800" height="520" loading="lazy">
+              <div class="travel-card__overlay" aria-hidden="true"></div>
+              <div class="travel-card__content">
+                <p class="travel-card__label">International Tours</p>
+                <h3 class="travel-card__title">Explore the World</h3>
+                <p class="travel-card__desc">Dubai, Turkey, Europe, Southeast Asia — custom itineraries with full visa and tour support from experts.</p>
+                <span class="travel-card__cta">Explore Destinations →</span>
+              </div>
+            </a>
+            <a href="domestic.html" class="travel-card">
+              <img class="travel-card__bg" src="assets/images/swat.jpg" alt="Waterfall in Swat Valley, Pakistan" width="800" height="520" loading="lazy">
+              <div class="travel-card__overlay" aria-hidden="true"></div>
+              <div class="travel-card__content">
+                <p class="travel-card__label">Domestic Pakistan</p>
+                <h3 class="travel-card__title">Discover Pakistan</h3>
+                <p class="travel-card__desc">Hunza, Swat, Lahore, Gwadar — guided group tours across Pakistan's most beautiful regions.</p>
+                <span class="travel-card__cta">Discover Pakistan →</span>
+              </div>
+            </a>
+            <a href="umrah.html" class="travel-card">
+              <img class="travel-card__bg" src="assets/images/kaaba.jpg" alt="View of the Kaaba in Makkah, Saudi Arabia" width="800" height="520" loading="lazy">
+              <div class="travel-card__overlay" aria-hidden="true"></div>
+              <div class="travel-card__content">
+                <p class="travel-card__label">Umrah Packages</p>
+                <h3 class="travel-card__title">Journey to the Haram</h3>
+                <p class="travel-card__desc">All-inclusive group packages from Karachi — visa, flights, hotels near Haram, and guided ziyarat.</p>
+                <span class="travel-card__cta">View Packages →</span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>

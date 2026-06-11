@@ -111,39 +111,75 @@ python -m http.server 8080
 
    `Timestamp | Form Type | Full Name | Phone | Email | Travelers | Package/Destination | Message`
 
-2. Go to **Extensions → Apps Script** and paste:
+2. Go to **Extensions → Apps Script** and paste the script from [`google-apps-script/Code.gs`](google-apps-script/Code.gs), or use:
 
    ```javascript
    function doPost(e) {
+     try {
+       if (!e || !e.postData || !e.postData.contents) {
+         return ContentService.createTextOutput(
+           JSON.stringify({ result: "error", message: "No POST data" })
+         ).setMimeType(ContentService.MimeType.JSON);
+       }
+       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+       var data = JSON.parse(e.postData.contents);
+       sheet.appendRow([
+         new Date(),
+         data.formType,
+         data.fullName,
+         data.phone,
+         data.email,
+         data.travelers,
+         data.interest,
+         data.message
+       ]);
+       return ContentService
+         .createTextOutput(JSON.stringify({ result: "success" }))
+         .setMimeType(ContentService.MimeType.JSON);
+     } catch (err) {
+       return ContentService
+         .createTextOutput(JSON.stringify({ result: "error", message: String(err) }))
+         .setMimeType(ContentService.MimeType.JSON);
+     }
+   }
+
+   // Run this from the editor to test — NOT doPost
+   function testAppendRow() {
      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-     var data = JSON.parse(e.postData.contents);
      sheet.appendRow([
-       new Date(),
-       data.formType,
-       data.fullName,
-       data.phone,
-       data.email,
-       data.travelers,
-       data.interest,
-       data.message
+       new Date(), "Test Inquiry", "Test User", "+92 331 7259177",
+       "test@example.com", 2, "Quad Sharing", "Editor test row"
      ]);
-     return ContentService
-       .createTextOutput(JSON.stringify({ result: "success" }))
-       .setMimeType(ContentService.MimeType.JSON);
    }
    ```
 
-3. **Deploy → New deployment → Web app**
+3. **Test the sheet connection:** select `testAppendRow` in the function dropdown → click **Run** → authorize if prompted → check your sheet for a new row.
+
+   > **Do not click Run on `doPost`.** That causes `Cannot read properties of undefined (reading 'postData')` because the editor does not send HTTP POST data. `doPost` only runs when your website submits a form.
+
+4. **Deploy → New deployment → Web app**
    - Execute as: **Me**
    - Who has access: **Anyone**
 
-4. Copy the deployment URL and set it at the top of `js/main.js`:
+5. Copy the deployment URL and set it at the top of `js/main.js`:
 
    ```javascript
    const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
    ```
 
+6. **Verify the deployment:** open the URL in your browser. You should see:
+   `{"result":"ok","message":"GreenDome form endpoint is live"}` *(if using the full script from `google-apps-script/Code.gs`)*
+
 > Until the URL is configured, forms simulate a successful submission for UI testing.
+
+### Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| `postData` undefined when clicking Run | Use `testAppendRow` instead — `doPost` only works via deployed Web App |
+| Form shows success but no row in sheet | Redeploy Web App after code changes; set **Who has access: Anyone** |
+| Authorization required | Run `testAppendRow` once and approve Google permissions |
+| Old URL not working | Deploy → **New deployment** (not Edit) to get a fresh URL |
 
 ---
 

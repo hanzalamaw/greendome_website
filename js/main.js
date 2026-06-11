@@ -1,4 +1,4 @@
-const GOOGLE_SHEET_URL = "YOUR_APPS_SCRIPT_URL_HERE";
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzWKY8PQfMShp0xp_c51S2uUk1KaGX1KLcLxTwOYxsVywemxcL7isFHXKW09_0fVsqfQA/exec";
 
 /* ==========================================================================
    ACTIVE PAGE NAV — highlight current page in navbar
@@ -67,14 +67,14 @@ function initHamburgerMenu() {
 
   const closeMenu = () => {
     hamburger.classList.remove("hamburger--open");
-    navMenu.classList.remove("navbar__nav--open");
+    navMenu.classList.remove("navbar__island--open");
     hamburger.setAttribute("aria-expanded", "false");
     document.body.classList.remove("menu-open");
   };
 
   hamburger.addEventListener("click", () => {
     const isOpen = hamburger.classList.toggle("hamburger--open");
-    navMenu.classList.toggle("navbar__nav--open", isOpen);
+    navMenu.classList.toggle("navbar__island--open", isOpen);
     hamburger.setAttribute("aria-expanded", String(isOpen));
     document.body.classList.toggle("menu-open", isOpen);
   });
@@ -238,44 +238,60 @@ async function handleFormSubmit(event) {
   event.preventDefault();
 
   const form = event.target;
+  const isBannerForm = form.getAttribute("data-form-variant") === "banner";
   const formType = form.getAttribute("data-form-type");
   const submitBtn = form.querySelector('button[type="submit"]');
   const errorEl = form.querySelector(".form-error");
-  const originalBtnText = submitBtn.textContent;
+  const originalBtnHTML = submitBtn.innerHTML;
 
   errorEl.hidden = true;
 
   const formData = new FormData(form);
   const fullName = formData.get("fullName")?.trim();
   const phone = formData.get("phone")?.trim();
-  const email = formData.get("email")?.trim();
+  const email = formData.get("email")?.trim() || "";
   const travelers = formData.get("travelers");
-  const interest = formData.get("interest")?.trim();
+  const interest = formData.get("interest")?.trim() || formType;
   const message = formData.get("message")?.trim() || "";
 
-  if (!fullName || !phone || !email || !travelers || !interest) {
+  if (!fullName || !phone || !travelers) {
     errorEl.textContent = "Please fill in all required fields.";
     errorEl.hidden = false;
     return;
   }
 
-  if (!validateEmail(email)) {
-    errorEl.textContent = "Please enter a valid email address.";
-    errorEl.hidden = false;
-    return;
+  if (!isBannerForm) {
+    if (!email || !formData.get("interest")?.trim()) {
+      errorEl.textContent = "Please fill in all required fields.";
+      errorEl.hidden = false;
+      return;
+    }
+    if (!validateEmail(email)) {
+      errorEl.textContent = "Please enter a valid email address.";
+      errorEl.hidden = false;
+      return;
+    }
   }
 
   submitBtn.disabled = true;
-  submitBtn.textContent = "Sending...";
+  if (isBannerForm) {
+    submitBtn.innerHTML = 'Sending...';
+  } else {
+    submitBtn.textContent = "Sending...";
+  }
+
+  const travelersValue = isBannerForm
+    ? String(travelers)
+    : parseInt(travelers, 10);
 
   const payload = {
     formType,
     fullName,
     phone,
-    email,
-    travelers: parseInt(travelers, 10),
+    email: email || "—",
+    travelers: travelersValue,
     interest,
-    message,
+    message: message || (isBannerForm ? "Hero banner inquiry" : ""),
     timestamp: new Date().toISOString(),
   };
 
@@ -301,13 +317,40 @@ async function handleFormSubmit(event) {
     errorEl.textContent = "Something went wrong. Please WhatsApp us directly.";
     errorEl.hidden = false;
     submitBtn.disabled = false;
-    submitBtn.textContent = originalBtnText;
+    submitBtn.innerHTML = originalBtnHTML;
   }
 }
 
 function initForms() {
   document.querySelectorAll(".inquiry-form").forEach((form) => {
     form.addEventListener("submit", handleFormSubmit);
+  });
+}
+
+/* ==========================================================================
+   HERO BANNER — inquiry tabs (home page)
+   ========================================================================== */
+function initHeroInquiryTabs() {
+  const form = document.getElementById("hero-inquiry-form");
+  const tabs = document.querySelectorAll(".hero-inquiry__tab");
+  if (!form || !tabs.length) return;
+
+  const formTypeInput = form.querySelector('input[name="formType"]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const type = tab.getAttribute("data-form-type");
+
+      tabs.forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+
+      form.setAttribute("data-form-type", type);
+      if (formTypeInput) formTypeInput.value = type;
+    });
   });
 }
 
@@ -361,6 +404,55 @@ function initScrollToTop() {
 }
 
 /* ==========================================================================
+   TRAVEL PARTNER SLIDER
+   ========================================================================== */
+function initTravelPartnerSlider() {
+  const track = document.getElementById("travel-partner-track");
+  const prevBtn = document.getElementById("travel-partner-prev");
+  const nextBtn = document.getElementById("travel-partner-next");
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const cards = track.querySelectorAll(".travel-card");
+  if (cards.length === 0) return;
+
+  let index = 0;
+
+  const getVisibleCount = () => (window.innerWidth <= 767 ? 1 : 2);
+
+  const getMaxIndex = () => Math.max(0, cards.length - getVisibleCount());
+
+  const updateSlider = () => {
+    const maxIndex = getMaxIndex();
+    if (index > maxIndex) index = maxIndex;
+
+    const card = cards[0];
+    const gap = parseFloat(getComputedStyle(track).gap) || 20;
+    const offset = index * (card.offsetWidth + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index >= maxIndex;
+  };
+
+  prevBtn.addEventListener("click", () => {
+    if (index > 0) {
+      index -= 1;
+      updateSlider();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (index < getMaxIndex()) {
+      index += 1;
+      updateSlider();
+    }
+  });
+
+  window.addEventListener("resize", updateSlider, { passive: true });
+  updateSlider();
+}
+
+/* ==========================================================================
    INIT
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
@@ -372,6 +464,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initStatsCounter();
   initModal();
   initForms();
+  initHeroInquiryTabs();
   initDestinationTiles();
+  initTravelPartnerSlider();
   initScrollToTop();
 });
