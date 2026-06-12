@@ -35,27 +35,6 @@ function initSmoothScroll() {
 }
 
 /* ==========================================================================
-   NAVBAR SCROLL BEHAVIOR
-   ========================================================================== */
-function initNavbarScroll() {
-  const navbar = document.getElementById("navbar");
-  if (!navbar) return;
-
-  const isInnerPage = document.body.classList.contains("page-inner");
-
-  const updateNavbar = () => {
-    if (isInnerPage || window.scrollY > 60) {
-      navbar.classList.add("navbar--scrolled");
-    } else {
-      navbar.classList.remove("navbar--scrolled");
-    }
-  };
-
-  updateNavbar();
-  window.addEventListener("scroll", updateNavbar, { passive: true });
-}
-
-/* ==========================================================================
    HAMBURGER MENU
    ========================================================================== */
 function initHamburgerMenu() {
@@ -458,7 +437,6 @@ function initTravelPartnerSlider() {
 document.addEventListener("DOMContentLoaded", () => {
   initActivePageNav();
   initSmoothScroll();
-  initNavbarScroll();
   initHamburgerMenu();
   initScrollReveal();
   initStatsCounter();
