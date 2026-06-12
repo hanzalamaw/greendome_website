@@ -288,13 +288,14 @@ ul {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  padding-left: 0.75rem;
   padding-right: 1.5rem;
   margin-right: 1.75rem;
   border-right: 1px solid rgba(26, 58, 42, 0.12);
 }
 
 .navbar__logo-img {
-  height: 36px;
+  height: 44px;
   width: auto;
   object-fit: contain;
 }
@@ -1459,7 +1460,7 @@ body.page-inner .hamburger__line {
    ========================================================================== */
 
 .form-section {
-  max-width: 720px;
+  max-width: 100%;
 }
 
 .form-section__title {
@@ -1470,7 +1471,7 @@ body.page-inner .hamburger__line {
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1rem;
   margin-bottom: 1.25rem;
 }
@@ -1938,7 +1939,7 @@ body.page-inner .hamburger__line {
   }
 
   .navbar__logo-img {
-    height: 32px;
+    height: 38px;
   }
 }
 
@@ -2059,7 +2060,7 @@ body.page-inner .hamburger__line {
   }
 
   .navbar__logo-img {
-    height: 32px;
+    height: 36px;
   }
 
   .section {
