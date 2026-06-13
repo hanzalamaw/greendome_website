@@ -2243,3 +2243,14 @@ body.page-inner .hamburger__line {
     right: 1.25rem;
   }
 }
+
+/* ==========================================================================
+   ZIYARAT PAGE — 2-tile centered destinations grid override
+   ========================================================================== */
+
+[data-page="ziyarat"] .destinations-grid {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
