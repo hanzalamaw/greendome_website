@@ -272,15 +272,20 @@ ul {
   gap: 0;
   width: fit-content;
   max-width: 100%;
-  padding: 0.4rem 0.75rem 0.4rem 0.85rem;
+
+  /* Increased overall strip size */
+  padding: 0.2rem 1.5rem;
+
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(56px) saturate(210%);
   -webkit-backdrop-filter: blur(56px) saturate(210%);
   border: 1px solid rgba(255, 255, 255, 0.62);
+
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
   transition: var(--transition);
 }
 
@@ -288,14 +293,16 @@ ul {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  padding-left: 0.75rem;
-  padding-right: 1.5rem;
-  margin-right: 1.75rem;
+
+  padding-left: 1rem;
+  padding-right: 2rem;
+  margin-right: 2rem;
+
   border-right: 1px solid rgba(26, 58, 42, 0.12);
 }
 
 .navbar__logo-img {
-  height: 44px;
+  height: 56px;
   width: auto;
   object-fit: contain;
 }
@@ -312,7 +319,10 @@ ul {
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 0.1rem;
+
+  /* FIXED: no space between 1 and rem */
+  gap: 1.5rem;
+
   list-style: none;
   margin: 0;
   padding: 0;
@@ -320,12 +330,19 @@ ul {
 
 .nav-link {
   display: inline-block;
-  font-size: 0.8125rem;
-  font-weight: 500;
+
+  /* Larger text */
+  font-size: 1rem;
+
+  font-weight: 600;
   color: #111111;
-  padding: 0.45rem 0.75rem;
+
+  /* Larger button area */
+  padding: 0.75rem 1rem;
+
   border-radius: 9999px;
   white-space: nowrap;
+
   transition: var(--transition);
 }
 
@@ -337,7 +354,9 @@ ul {
 .nav-link.active {
   color: var(--white);
   background: var(--primary);
-  font-weight: 600;
+
+  font-weight: 700;
+
   box-shadow: 0 2px 12px rgba(26, 58, 42, 0.25);
 }
 
@@ -347,9 +366,12 @@ ul {
 
 .navbar__cta {
   flex-shrink: 0;
-  margin-left: 1.125rem;
-  padding-left: 1.125rem;
+
+  margin-left: 1.5rem;
+  padding-left: 1.5rem;
+
   border-left: 1px solid rgba(26, 58, 42, 0.12);
+
   box-shadow: none;
 }
 
