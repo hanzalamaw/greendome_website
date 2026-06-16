@@ -2276,3 +2276,221 @@ body.page-inner .hamburger__line {
   margin-left: auto;
   margin-right: auto;
 }
+
+/*adding new style for umrah page */
+
+/* --- Shared utilities used by this section --- */
+.gold-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--clr-gold);
+  flex-shrink: 0;
+  margin-top: 0.45em;
+}
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: 0.75rem;
+}
+.section-eyebrow::before { content: '/// '; opacity: 0.5; }
+
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--clr-primary);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--clr-text-muted);
+}
+
+/* --- Section header --- */
+.services__title { margin-bottom: 3.5rem; }
+
+/* --- Flight & Visa row --- */
+.services__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  align-items: center;
+  margin-bottom: var(--section-pad);
+}
+
+.services__row-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.services__row-icon-row .material-symbols-outlined {
+  font-size: 2.5rem;
+  color: var(--clr-gold);
+}
+.services__row-icon-row h3 {
+  font-family: var(--ff-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+}
+
+.services__row-desc {
+  font-size: 1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.services__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.services__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--clr-primary);
+}
+
+.services__row-img {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+.services__row-img img { width: 100%; height: auto; object-fit: cover; }
+
+/* --- Hotel block --- */
+.hotel-block { margin-bottom: var(--section-pad); }
+
+.hotel-block__top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.hotel-block__heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.hotel-block__heading .material-symbols-outlined { font-size: 2.5rem; color: var(--clr-gold); }
+.hotel-block__heading h3 {
+  font-family: var(--ff-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+}
+
+.hotel-block__sub { font-size: 1rem; color: var(--clr-text-muted); }
+
+.hotel-block__stays {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.hotel-stay {
+  background: var(--clr-surface-mid);
+  padding: 1.1rem 1.25rem;
+  border-left: 4px solid var(--clr-gold);
+}
+.hotel-stay strong {
+  display: block;
+  font-weight: 700;
+  color: var(--clr-primary);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+.hotel-stay span { font-size: 0.875rem; color: var(--clr-text-muted); line-height: 1.5; }
+
+.hotel-block__photos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+.hotel-block__photos img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  transition: transform 0.45s ease;
+}
+.hotel-block__photos img:hover { transform: scale(1.04); }
+
+/* --- Transport & Special Features cards --- */
+.services__two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+}
+
+.svc-card {
+  background: var(--clr-surface-low);
+  border: 1px solid var(--clr-border);
+  padding: var(--card-pad);
+}
+
+.svc-card__img {
+  width: 50%;
+  height: 90px;
+  object-fit: cover;
+  border: 1px solid var(--clr-border);
+  margin: 0 auto 1.5rem auto;
+  display: block;
+  border-radius: var(--radius);
+}
+
+.svc-card__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.svc-card__heading .material-symbols-outlined { font-size: 1.8rem; color: var(--clr-gold); }
+.svc-card__heading h3 {
+  font-family: var(--ff-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+}
+
+.svc-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.svc-card__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--clr-primary);
+}
+
+/* --- Responsive --- */
+@media (max-width: 860px) {
+  .services__row       { grid-template-columns: 1fr; }
+  .services__two-col   { grid-template-columns: 1fr; }
+  .hotel-block__stays  { grid-template-columns: 1fr; }
+  .hotel-block__photos { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .hotel-block__photos { grid-template-columns: 1fr 1fr; }
+}
