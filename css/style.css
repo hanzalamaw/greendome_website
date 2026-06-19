@@ -721,9 +721,16 @@ body.page-inner .hamburger__line {
 
 .mission-card {
   background: var(--off-white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   padding: 2rem;
+  border-radius: var(--radius);
+  border-left: 3px solid transparent;
+  transition: var(--transition);
+}
+
+.mission-card:hover {
+  border-left-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 8px 30px rgba(197, 160, 40, 0.1);
 }
 
 .mission-card__icon {
@@ -733,7 +740,7 @@ body.page-inner .hamburger__line {
 }
 
 .mission-card__title {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -1652,14 +1659,13 @@ body.page-inner .hamburger__line {
 }
 
 .testimonial-card__quote {
-  font-size: 4rem;
+  display: block;
+  font-size: 3rem;
   font-weight: 800;
   color: var(--gold);
   line-height: 1;
-  opacity: 0.35;
-  position: absolute;
-  top: 1rem;
-  left: 1.5rem;
+  opacity: 0.2;
+  margin-bottom: 0.75rem;
 }
 
 .testimonial-card__stars {
@@ -1690,6 +1696,73 @@ body.page-inner .hamburger__line {
   font-weight: 600;
   color: var(--text-primary);
   font-style: normal;
+}
+
+/* testimonial slider*/
+.testimonial-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.slider-track {
+  position: relative;
+  width: 1100px;
+  height: 320px;
+}
+
+.testimonial-card {
+  position: absolute;
+  width: 340px;
+  transition: all 0.5s ease;
+}
+
+/* Left Card */
+.testimonial-card.left {
+  left: 0;
+  transform: scale(0.92);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+/* Center Card */
+.testimonial-card.center {
+  left: 380px;
+  transform: scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+
+/* Right Card */
+.testimonial-card.right {
+  left: 760px;
+  transform: scale(0.92);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+/* Hidden Cards */
+.testimonial-card.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slider-btn {
+  width: 54px;
+  height: 54px;
+  border: none;
+  border-radius: 50%;
+  background: #1A4731;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-btn:hover {
+  transform: scale(1.05);
 }
 
 /* ==========================================================================
@@ -2527,6 +2600,10 @@ body.page-inner .hamburger__line {
   color: #1A4731; /* --clr-primary */
   line-height: 1.15;
   margin-bottom: 3.5rem;
+}
+
+.section--dark .section-title {
+    color: #ffffff;
 }
 
 .gold-dot {
