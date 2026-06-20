@@ -431,6 +431,126 @@ function initTravelPartnerSlider() {
   updateSlider();
 }
 
+(() => {
+  // ── DOM refs ────────────────────────────────────────────────────────────
+  const track   = document.getElementById('tcarousel-track');
+  const prevBtn = document.getElementById('tcarousel-prev');
+  const nextBtn = document.getElementById('tcarousel-next');
+  const dotsWrap = document.getElementById('tcarousel-dots');
+ 
+  if (!track || !prevBtn || !nextBtn) return; // guard: section not on page
+ 
+  const cards = Array.from(track.querySelectorAll('.tcarousel__card'));
+  const total = cards.length;
+ 
+  // Active index = the card currently in the CENTER position
+  let active = 0;
+ 
+  // ── Build dot indicators ─────────────────────────────────────────────────
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'tcarousel__dot';
+    dot.setAttribute('aria-label', `Go to review ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+ 
+  const dots = Array.from(dotsWrap.querySelectorAll('.tcarousel__dot'));
+ 
+  // ── Core render function ─────────────────────────────────────────────────
+  /**
+   * Assigns position classes to each card based on the current `active` index.
+   *
+   * Position map (wraps around using modulo):
+   * active - 1  → left
+   * active      → center
+   * active + 1  → right
+   * everything else → hidden (no position class)
+   */
+  function render() {
+    const leftIdx  = (active - 1 + total) % total;
+    const rightIdx = (active + 1) % total;
+ 
+    cards.forEach((card, i) => {
+      // Remove all position classes first
+      card.classList.remove(
+        'tcarousel__card--left',
+        'tcarousel__card--center',
+        'tcarousel__card--right'
+      );
+ 
+      if (i === active)    card.classList.add('tcarousel__card--center');
+      else if (i === leftIdx)  card.classList.add('tcarousel__card--left');
+      else if (i === rightIdx) card.classList.add('tcarousel__card--right');
+      // Cards not in these three slots remain in the default hidden state
+    });
+ 
+    // Update dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('tcarousel__dot--active', i === active);
+    });
+ 
+    // Update ARIA live region (optional — announces to screen readers)
+    track.setAttribute('aria-label', `Review ${active + 1} of ${total}`);
+  }
+ 
+  // ── Navigate ─────────────────────────────────────────────────────────────
+  function goTo(index) {
+    active = (index + total) % total; // always wrap
+    render();
+  }
+ 
+  function next() { goTo(active + 1); }
+  function prev() { goTo(active - 1); }
+ 
+  // ── Event listeners ──────────────────────────────────────────────────────
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+ 
+  // Clicking a side card navigates to it
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      if (i !== active) goTo(i);
+    });
+  });
+ 
+  // Keyboard: left/right arrow keys when carousel is focused
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft')  prev();
+  });
+ 
+  // Optional: auto-advance every 6 seconds, pauses on hover
+  let autoTimer = setInterval(next, 6000);
+ 
+  const carousel = document.querySelector('.tcarousel');
+  if (carousel) {
+    carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    carousel.addEventListener('mouseleave', () => {
+      autoTimer = setInterval(next, 6000);
+    });
+  }
+ 
+  // Touch / swipe support for mobile
+  let touchStartX = 0;
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+ 
+  track.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {   // 40 px threshold
+      diff > 0 ? next() : prev();
+    }
+  }, { passive: true });
+ 
+  // ── Init ─────────────────────────────────────────────────────────────────
+  render();
+ 
+})();
+
+
+
 /* ==========================================================================
    INIT
    ========================================================================== */

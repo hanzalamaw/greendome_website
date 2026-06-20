@@ -1698,73 +1698,195 @@ body.page-inner .hamburger__line {
   font-style: normal;
 }
 
-/* testimonial slider*/
-.testimonial-slider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.slider-track {
+/* ------------------------------------------------------------------
+   TESTIMONIAL CAROUSEL — layout shell
+   ------------------------------------------------------------------ */
+ 
+/* Remove the old flex-row slider layout entirely */
+.tcarousel {
   position: relative;
-  width: 1100px;
-  height: 320px;
+  /* Extra vertical space so scaled-up center card never clips */
+  padding: 1.5rem 0 2.5rem;
+  overflow: hidden; /* Hides off-screen cards */
 }
-
-.testimonial-card {
+ 
+/* The track is the full-width stage; cards are positioned inside it */
+.tcarousel__track {
+  position: relative;
+  width: 100%;
+  /* Height is driven by the tallest card; adjust if needed */
+  min-height: 340px;
+}
+ 
+/* ------------------------------------------------------------------
+   INDIVIDUAL CARD — base state (hidden / off-screen)
+   ------------------------------------------------------------------ */
+.tcarousel__card {
   position: absolute;
-  width: 340px;
-  transition: all 0.5s ease;
-}
-
-/* Left Card */
-.testimonial-card.left {
-  left: 0;
-  transform: scale(0.92);
-  opacity: 0.6;
-  z-index: 1;
-}
-
-/* Center Card */
-.testimonial-card.center {
-  left: 380px;
-  transform: scale(1);
-  opacity: 1;
-  z-index: 3;
-}
-
-/* Right Card */
-.testimonial-card.right {
-  left: 760px;
-  transform: scale(0.92);
-  opacity: 0.6;
-  z-index: 1;
-}
-
-/* Hidden Cards */
-.testimonial-card.hidden {
+  /*
+    Each card is 32% wide. Three cards + two gaps ≈ 100% of the track.
+    Left / center / right positions are computed by JS via CSS custom props.
+  */
+  width: 32%;
+  top: 0;
+ 
+  /* All transitions run together for a smooth sweep */
+  transition:
+    transform  0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity    0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    left       0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.5s ease,
+    z-index    0s; /* z-index switches instantly so cards don't cross */
+ 
+  /* Off-screen / hidden default */
+  left: 50%;
   opacity: 0;
+  transform: translateX(-50%) scale(0.88);
   pointer-events: none;
+  z-index: 0;
+ 
+  /* Preserve the existing card look */
+  cursor: default;
 }
-
-.slider-btn {
-  width: 54px;
-  height: 54px;
-  border: none;
-  border-radius: 50%;
-  background: #1A4731;
-  color: white;
+ 
+/* ------------------------------------------------------------------
+   POSITION CLASSES — assigned by JS each render
+   ------------------------------------------------------------------ */
+ 
+/* LEFT card — 34% from left edge, faded, slightly smaller */
+.tcarousel__card--left {
+  left: 2%;            /* sits at the left third */
+  opacity: 0.55;
+  transform: translateX(0) scale(0.93);
+  pointer-events: auto;
+  z-index: 1;
+  cursor: pointer;     /* clicking a side card navigates */
+}
+ 
+/* CENTER card — perfectly centered, full opacity, full scale */
+.tcarousel__card--center {
+  left: 50%;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  pointer-events: auto;
+  z-index: 3;
+  box-shadow: 0 20px 50px rgba(15, 31, 23, 0.18),
+              0 0 0 2px rgba(197, 160, 40, 0.25); /* subtle gold ring */
+}
+ 
+/* RIGHT card — mirror of left */
+.tcarousel__card--right {
+  left: 66%;           /* sits at the right third */
+  opacity: 0.55;
+  transform: translateX(0) scale(0.93);
+  pointer-events: auto;
+  z-index: 1;
   cursor: pointer;
+}
+ 
+/* ------------------------------------------------------------------
+   CONTROLS — arrows + dots
+   ------------------------------------------------------------------ */
+.tcarousel__controls {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1.25rem;
+  margin-top: 2.25rem;
 }
-
-.slider-btn:hover {
-  transform: scale(1.05);
+ 
+/* Arrow buttons use the site's primary green */
+.tcarousel__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--primary);      /* #1a3a2a */
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(26, 58, 42, 0.25);
 }
-
+ 
+.tcarousel__btn:hover {
+  background: var(--primary-light); /* #2d5a3d */
+  transform: scale(1.07);
+  box-shadow: 0 6px 20px rgba(26, 58, 42, 0.35);
+}
+ 
+.tcarousel__btn:active {
+  transform: scale(0.97);
+}
+ 
+.tcarousel__btn .material-icons {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+ 
+/* Dot indicators */
+.tcarousel__dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+ 
+.tcarousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);        /* #e0ebe4 */
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+ 
+.tcarousel__dot--active {
+  background: var(--primary);
+  width: 22px;                       /* pill shape for active dot */
+  border-radius: 9999px;
+}
+ 
+/* ------------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------------ */
+ 
+/* Tablet — show only center + hint of sides */
+@media (max-width: 1024px) {
+  .tcarousel__card {
+    width: 44%;
+  }
+  .tcarousel__card--left {
+    left: -4%;
+    opacity: 0.35;
+  }
+  .tcarousel__card--right {
+    left: 60%;
+    opacity: 0.35;
+  }
+}
+ 
+/* Mobile — single card, full width */
+@media (max-width: 640px) {
+  .tcarousel__track {
+    min-height: 380px;
+  }
+  .tcarousel__card {
+    width: 90%;
+  }
+  /* Hide side cards on mobile — too cramped */
+  .tcarousel__card--left,
+  .tcarousel__card--right {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .tcarousel__card--center {
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+  }
+}
 /* ==========================================================================
    CONTACT
    ========================================================================== */
@@ -2821,4 +2943,583 @@ body.page-inner .hamburger__line {
 }
 @media (max-width: 860px) {
   .services__two-col { grid-template-columns: 1fr; }
+}
+
+
+
+
+
+Mobile fix
+Code · CSS 
+
+
+
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Mobile fix · CSS
+/*
+============================================================================
+  GREENDOME — MOBILE RESPONSIVENESS FIX PATCH
+  File: append this to the BOTTOM of css/style.css
+  
+  Audit issues addressed (12 root causes → targeted fixes):
+  
+  ISSUE 1: .section-title redefined twice → cascade conflict on font-weight
+            and margin-bottom overriding base styles site-wide.
+  ISSUE 2: Nested section.section--white inside section.section--off-white
+            doubles vertical padding (~20rem gap on mobile).
+  ISSUE 3: Mobile nav island open state causes overflow, cramped links,
+            and inconsistent spacing on 360–430px viewports.
+  ISSUE 4: --nav-height (64px) used for hero padding but open drawer exceeds
+            64px, making page-hero start below the menu.
+  ISSUE 5: .page-hero padding too tall on mobile (wastes ~40% screen height).
+  ISSUE 6: services__two-col has padding: 20px 28px causing horizontal bleed.
+  ISSUE 7: hotel-block__photos height: 210px never overridden on small screens.
+  ISSUE 8: tcarousel overflow:hidden clips center card's gold box-shadow.
+  ISSUE 9: tcarousel__track min-height insufficient when cards wrap on narrow.
+  ISSUE 10: .services__list grid-template-columns: 1fr 1fr wraps badly <360px.
+  ISSUE 11: font-weight: 650 invalid CSS value → normalize to 700.
+  ISSUE 12: Safe area insets missing for iPhone notch/home-bar areas.
+============================================================================
+*/
+ 
+/* ============================================================
+   FIX 1 — Resolve .section-title cascade conflict
+   Root: The umrah-specific block redefines .section-title with
+   font-weight:600 and margin-bottom:3.5rem, overriding the
+   base definition (font-weight:800, margin-bottom:1rem) for
+   EVERY page that loads style.css. Scoping it to umrah page
+   via body[data-page="umrah"] prevents cross-page breakage.
+   ============================================================ */
+ 
+/* Revert the rogue global overrides */
+.section-title {
+  font-weight: 800;        /* restore base */
+  margin-bottom: 1rem;     /* restore base */
+}
+ 
+/* Apply umrah-specific title treatment only on that page */
+body[data-page="umrah"] .section-eyebrow ~ .section-title,
+body[data-page="umrah"] .services__row h3,
+body[data-page="umrah"] .hotel-block__heading h3,
+body[data-page="umrah"] .svc-card__heading h3 {
+  font-weight: 700;        /* valid value; visually same as 650 → 600 */
+}
+ 
+/* ============================================================
+   FIX 2 — Collapse double-padding from nested sections
+   Root: section.section--white sits *inside* section.section--off-white.
+   Both fire padding:6rem 0. The fix removes the inner section's
+   padding so it inherits from its parent container instead.
+   ============================================================ */
+ 
+/* The inner services section on umrah.html */
+.section--off-white .section--white {
+  padding: 0;             /* zeroed — outer .section--off-white already pads */
+}
+ 
+/* Also clean up the hotel-block's own margin collision */
+.section--off-white .hotel-block {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+ 
+/* services__two-col bleed fix (Issue 6) */
+.services__two-col {
+  padding: 0;             /* remove the 20px 28px that caused side bleed */
+  gap: 1.25rem;
+}
+ 
+/* ============================================================
+   FIX 3 + 4 — Mobile navbar open drawer
+   Root: The island flex-wraps with generous padding and the
+   open height is unbounded, breaking scroll-padding and hero
+   positioning. Fix: tighter padding, smaller logo, links use
+   full-width rows with consistent tap targets.
+   ============================================================ */
+ 
+@media (max-width: 767px) {
+ 
+  /* Tighter closed state */
+  .navbar__island {
+    padding: 0.35rem 0.5rem 0.35rem 0.75rem;
+    width: calc(100% - 1.5rem);
+    max-width: 430px;
+  }
+ 
+  /* Logo in closed state — smaller to give more room to hamburger */
+  .navbar__logo {
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 0;
+    border-right: none;
+  }
+ 
+  .navbar__logo-img {
+    height: 34px;          /* was 36px — minor but helps at 360px */
+  }
+ 
+  /* Open drawer shell */
+  .navbar__island.navbar__island--open {
+    flex-wrap: wrap;
+    border-radius: 20px;
+    padding: 0.75rem 0.75rem 1rem;
+    width: calc(100% - 1.5rem);
+    max-width: 430px;
+    gap: 0;
+  }
+ 
+  /* Row 1 of open island: logo + hamburger */
+  .navbar__island.navbar__island--open .navbar__logo {
+    flex: 1;
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+ 
+  /* Nav links column inside open drawer */
+  .navbar__island.navbar__island--open .navbar__nav {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(26, 58, 42, 0.1);
+    padding-top: 0.5rem;
+  }
+ 
+  .navbar__links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.125rem;            /* tighter rows — was 0.35rem */
+    width: 100%;
+  }
+ 
+  .nav-link {
+    text-align: left;          /* left-aligned feels more native on mobile */
+    padding: 0.625rem 0.875rem; /* 44px touch target maintained via min-height below */
+    font-size: 0.9375rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+  }
+ 
+  /* Book Now inside drawer */
+  .navbar__island.navbar__island--open .navbar__cta-mobile {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(26, 58, 42, 0.1);
+    padding-top: 0.75rem;
+  }
+ 
+  .navbar__cta-mobile.btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+ 
+/* ============================================================
+   FIX 5 — page-hero height on mobile
+   Root: calc(64px + 4rem) top padding + 4rem bottom = ~160px
+   of empty hero space before content. Reduced to breathable
+   but not wasteful values.
+   ============================================================ */
+ 
+@media (max-width: 767px) {
+  .page-hero {
+    padding-top: calc(var(--nav-height) + 2.5rem);
+    padding-bottom: 2.5rem;
+    min-height: 260px;
+  }
+ 
+  .page-hero--image {
+    min-height: 260px;
+  }
+ 
+  .page-hero__title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    line-height: 1.2;
+  }
+ 
+  .page-hero__subtext {
+    font-size: 0.9375rem;
+    margin-top: 0.5rem;
+  }
+}
+ 
+/* ============================================================
+   FIX 7 — Hotel photos height on small screens
+   Root: height: 210px hard-coded never adjusts below 560px,
+   making images either distorted or too small.
+   ============================================================ */
+ 
+@media (max-width: 560px) {
+  .hotel-block__photos img {
+    height: 140px;
+  }
+}
+ 
+@media (max-width: 400px) {
+  .hotel-block__photos img {
+    height: 120px;
+  }
+}
+ 
+/* ============================================================
+   FIX 8 — Carousel box-shadow clipping
+   Root: overflow:hidden on .tcarousel hides the center card's
+   elevated box-shadow. Use clip-path trick: allow overflow but
+   clip only the sides via padding compensation.
+   ============================================================ */
+ 
+.tcarousel {
+  overflow: visible;         /* allow shadow to render */
+  /* Contain the visible area so side cards don't scroll horizontally */
+  clip-path: inset(-40px 0px);   /* clip top/bottom generously, no side clip */
+}
+ 
+/* Re-hide truly off-screen cards (not just unfocused ones) */
+.tcarousel__card:not(.tcarousel__card--left):not(.tcarousel__card--center):not(.tcarousel__card--right) {
+  visibility: hidden;
+  pointer-events: none;
+}
+ 
+/* ============================================================
+   FIX 9 — Carousel track height adapts to card content
+   Root: min-height:340px fixed; on narrow screens card text
+   wraps and exceeds this, causing bottom content cutoff.
+   ============================================================ */
+ 
+.tcarousel__track {
+  min-height: 340px;
+}
+ 
+@media (max-width: 767px) {
+  .tcarousel__track {
+    min-height: 360px;
+  }
+}
+ 
+@media (max-width: 400px) {
+  .tcarousel__track {
+    min-height: 400px;
+  }
+}
+ 
+/* ============================================================
+   FIX 10 — services__list two-column grid below 360px
+   Root: grid-template-columns: 1fr 1fr wraps badly at 320px.
+   ============================================================ */
+ 
+@media (max-width: 380px) {
+  .services__list {
+    grid-template-columns: 1fr;
+  }
+}
+ 
+/* ============================================================
+   FIX 12 — iPhone safe area insets (notch + home bar)
+   Root: Fixed navbar and scroll-top button overlap notch/home
+   bar on iPhones with iOS safe area. env() variables fix this.
+   ============================================================ */
+ 
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+ 
+  .scroll-top {
+    bottom: max(1.25rem, calc(1.25rem + env(safe-area-inset-bottom, 0px)));
+    right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
+  }
+}
+ 
+/* ============================================================
+   GRANULAR BREAKPOINTS
+   320px–375px  |  376px–430px  |  431px–767px  |  768px+
+   ============================================================ */
+ 
+/* --- 320px to 375px: smallest Android + iPhone SE/mini --- */
+@media (max-width: 375px) {
+ 
+  /* Tighter container edge padding */
+  .container {
+    padding: 0 1rem;
+  }
+ 
+  /* Section padding reduced further */
+  .section {
+    padding: 3rem 0;
+  }
+ 
+  /* Package cards */
+  .packages-grid {
+    max-width: 100%;
+  }
+ 
+  .package-card {
+    padding: 1.5rem;
+  }
+ 
+  .package-card__price strong {
+    font-size: 1.5rem;
+  }
+ 
+  /* Process steps */
+  .process-step__number {
+    font-size: 2.25rem;
+  }
+ 
+  /* Carousel: card slightly wider */
+  .tcarousel__card {
+    width: 92%;
+  }
+ 
+  /* Hotel stays stack tighter */
+  .hotel-stay {
+    padding: 14px 16px;
+  }
+ 
+  .hotel-stay strong {
+    font-size: 1.1rem;
+  }
+ 
+  .hotel-stay span {
+    font-size: 0.875rem;
+  }
+}
+ 
+/* --- 376px to 430px: iPhone 12 Pro, 13, 14, 15 --- */
+@media (min-width: 376px) and (max-width: 430px) {
+ 
+  .container {
+    padding: 0 1.25rem;
+  }
+ 
+  .section {
+    padding: 3.5rem 0;
+  }
+ 
+  .package-card {
+    padding: 1.75rem;
+  }
+ 
+  /* Two-column grid for hotel stays works well here */
+  .hotel-stays {
+    grid-template-columns: repeat(2, 1fr);
+  }
+ 
+  /* svc-card images: full width at this size */
+  .svc-card__img {
+    height: 170px;
+  }
+ 
+  /* Carousel: standard mobile single-card */
+  .tcarousel__card {
+    width: 88%;
+  }
+}
+ 
+/* --- 431px to 767px: large phones / small tablets --- */
+@media (min-width: 431px) and (max-width: 767px) {
+ 
+  /* Side cards become faintly visible as a peek */
+  .tcarousel__card {
+    width: 72%;
+  }
+ 
+  .tcarousel__card--left {
+    left: -6%;
+    opacity: 0.3;
+  }
+ 
+  .tcarousel__card--right {
+    left: 78%;
+    opacity: 0.3;
+  }
+ 
+  .hotel-stays {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+ 
+/* --- 768px+: tablet and up --- */
+@media (min-width: 768px) and (max-width: 1024px) {
+ 
+  /* Restore side card visibility on tablet */
+  .tcarousel__card {
+    width: 44%;
+  }
+ 
+  .tcarousel__card--left {
+    left: -2%;
+    opacity: 0.4;
+  }
+ 
+  .tcarousel__card--right {
+    left: 58%;
+    opacity: 0.4;
+  }
+ 
+  /* Services row: still 2-col down to 768px */
+  .services__row {
+    grid-template-columns: 1fr 1fr;
+  }
+ 
+  /* Hotel photos: 2-col on tablet */
+  .hotel-block__photos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+ 
+  .hotel-block__photos img {
+    height: 180px;
+  }
+ 
+  /* Two-col svc cards: full width with comfortable gap */
+  .services__two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+ 
+/* ============================================================
+   MISC POLISH — applies across all mobile breakpoints
+   ============================================================ */
+ 
+/* Prevent any element from causing horizontal scroll */
+main {
+  overflow-x: hidden;
+}
+ 
+/* Consistent touch targets for all interactive elements */
+.book-package-btn,
+.btn--full {
+  min-height: 48px;
+}
+ 
+/* Prevent badge text overflow on very narrow cards */
+.package-badge,
+.package-card__sharing {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+ 
+/* Smooth rendering on iOS for fixed elements */
+.navbar,
+.modal,
+.scroll-top {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+ 
+/* svc-card image: remove the 50% width rule that made it odd on mobile */
+@media (max-width: 767px) {
+  .svc-card__img {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 1.25rem;
+  }
+ 
+  .svc-card {
+    padding: 1.5rem;
+  }
+ 
+  .services__two-col {
+    grid-template-columns: 1fr;
+  }
+ 
+  .hotel-stays {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+ 
+  /* Services list: full-width single column on mobile */
+  .services__list {
+    grid-template-columns: 1fr;
+  }
+ 
+  /* Flight & visa row: text first, image second */
+  .services__row {
+    grid-template-columns: 1fr;
+  }
+ 
+  .services__row-img {
+    margin-top: 1.25rem;
+  }
+ 
+  .services__row-img img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
+ 
+  /* Carousel controls: slightly smaller but still 44px touch target */
+  .tcarousel__btn {
+    width: 44px;
+    height: 44px;
+  }
+ 
+  .tcarousel__btn .material-icons {
+    font-size: 1.5rem;
+  }
+ 
+  .tcarousel__controls {
+    margin-top: 1.75rem;
+    gap: 1rem;
+  }
+ 
+  /* Process steps: full width stack */
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+ 
+  /* Form grid: single column */
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+ 
+  /* Modal dialog: tighter on small screens */
+  .modal__dialog {
+    padding: 1.5rem 1.25rem;
+    max-height: 95vh;
+    border-radius: var(--radius);
+  }
+ 
+  /* Stats float: ensure 2-col stays tight */
+  .stats-float {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 1rem;
+  }
+ 
+  .stats-float .stat-item__number,
+  .stats-float .stat-item__suffix {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+ 
+  /* Plan journey form */
+  .plan-journey-form {
+    padding: 1.25rem 1rem;
+  }
+ 
+  .plan-journey__fields {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+ 
+  /* Footer: single column, tighter */
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+ 
+  .footer {
+    padding-top: 3rem;
+  }
 }
