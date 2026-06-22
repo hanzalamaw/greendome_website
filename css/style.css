@@ -244,7 +244,7 @@ ul {
 }
 
 /* ==========================================================================
-   NAVBAR — Dynamic Island (logo + nav + CTA in one pill)
+   NAVBAR
    ========================================================================== */
 
 .navbar {
@@ -265,27 +265,21 @@ ul {
   pointer-events: auto;
 }
 
-/* Single frosted island — home hero (stays same on scroll) */
 .navbar__island {
   display: flex;
   align-items: center;
   gap: 0;
   width: fit-content;
   max-width: 100%;
-
-  /* Increased overall strip size */
   padding: 0.4rem 1.5rem;
-
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(56px) saturate(210%);
   -webkit-backdrop-filter: blur(56px) saturate(210%);
   border: 1px solid rgba(255, 255, 255, 0.62);
-
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.65);
-
   transition: var(--transition);
 }
 
@@ -293,11 +287,9 @@ ul {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-
   padding-left: 1rem;
   padding-right: 2rem;
   margin-right: 2rem;
-
   border-right: 1px solid rgba(26, 58, 42, 0.12);
 }
 
@@ -319,10 +311,7 @@ ul {
 .navbar__links {
   display: flex;
   align-items: center;
-
-  /* FIXED: no space between 1 and rem */
   gap: 1.3rem;
-
   list-style: none;
   margin: 0;
   padding: 0;
@@ -330,19 +319,12 @@ ul {
 
 .nav-link {
   display: inline-block;
-
-  /* Larger text */
   font-size: 1rem;
-
   font-weight: 600;
   color: #111111;
-
-  /* Larger button area */
   padding: 0.75rem 1rem;
-
   border-radius: 9999px;
   white-space: nowrap;
-
   transition: var(--transition);
 }
 
@@ -354,9 +336,7 @@ ul {
 .nav-link.active {
   color: var(--white);
   background: var(--primary);
-
   font-weight: 700;
-
   box-shadow: 0 2px 12px rgba(26, 58, 42, 0.25);
 }
 
@@ -366,12 +346,9 @@ ul {
 
 .navbar__cta {
   flex-shrink: 0;
-
   margin-left: 1.5rem;
   padding-left: 1.5rem;
-
   border-left: 1px solid rgba(26, 58, 42, 0.12);
-
   box-shadow: none;
 }
 
@@ -379,7 +356,6 @@ ul {
   display: none;
 }
 
-/* Light island — inner pages only */
 body.page-inner .navbar__island {
   background: rgba(255, 255, 255, 0.78);
   border-color: rgba(255, 255, 255, 0.9);
@@ -514,7 +490,10 @@ body.page-inner .hamburger__line {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Travel partner section (home) */
+/* ==========================================================================
+   TRAVEL PARTNER SECTION
+   ========================================================================== */
+
 .section--travel-partner {
   background: var(--white);
 }
@@ -675,7 +654,10 @@ body.page-inner .hamburger__line {
   transform: translateX(4px);
 }
 
-/* CTA banner */
+/* ==========================================================================
+   CTA BANNER
+   ========================================================================== */
+
 .cta-banner {
   background: var(--primary);
   color: var(--white);
@@ -711,7 +693,10 @@ body.page-inner .hamburger__line {
   border-color: var(--gold);
 }
 
-/* About mission cards */
+/* ==========================================================================
+   ABOUT MISSION CARDS
+   ========================================================================== */
+
 .mission-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -776,7 +761,6 @@ body.page-inner .hamburger__line {
   overflow: hidden;
 }
 
-/* Banner hero (home page) */
 .hero--banner {
   min-height: 88vh;
   justify-content: flex-start;
@@ -870,7 +854,10 @@ body.page-inner .hamburger__line {
   color: var(--white);
 }
 
-/* Floating stats card (overlaps hero + plan journey) */
+/* ==========================================================================
+   STATS FLOAT
+   ========================================================================== */
+
 .stats-float-wrap {
   position: relative;
   z-index: 10;
@@ -916,7 +903,10 @@ body.page-inner .hamburger__line {
   opacity: 1;
 }
 
-/* Plan Your Journey */
+/* ==========================================================================
+   PLAN YOUR JOURNEY
+   ========================================================================== */
+
 .plan-journey {
   position: relative;
   z-index: 1;
@@ -1094,7 +1084,10 @@ body.page-inner .hamburger__line {
   object-fit: cover;
 }
 
-/* Marquee */
+/* ==========================================================================
+   MARQUEE
+   ========================================================================== */
+
 .marquee {
   width: 100%;
   background: var(--off-white);
@@ -1120,11 +1113,10 @@ body.page-inner .hamburger__line {
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* Legacy stat counters (used inside stats-float) */
 .stat-item__number {
   font-weight: 800;
   line-height: 1;
@@ -1601,7 +1593,7 @@ body.page-inner .hamburger__line {
   display: block;
   font-size: 2.75rem;
   font-weight: 800;
-  color: rgba(219, 184, 74, 0.35);
+  color: rgba(255, 255, 255, 0.35);
   line-height: 1;
   margin-bottom: 0.75rem;
 }
@@ -1698,72 +1690,55 @@ body.page-inner .hamburger__line {
   font-style: normal;
 }
 
-/* ------------------------------------------------------------------
-   TESTIMONIAL CAROUSEL — layout shell
-   ------------------------------------------------------------------ */
- 
-/* Remove the old flex-row slider layout entirely */
+/* ==========================================================================
+   TESTIMONIAL CAROUSEL
+   ========================================================================== */
+
 .tcarousel {
   position: relative;
-  /* Extra vertical space so scaled-up center card never clips */
   padding: 1.5rem 0 2.5rem;
-  overflow: hidden; /* Hides off-screen cards */
+  overflow: visible;
+  clip-path: inset(-40px 0px);
 }
- 
-/* The track is the full-width stage; cards are positioned inside it */
+
 .tcarousel__track {
   position: relative;
   width: 100%;
-  /* Height is driven by the tallest card; adjust if needed */
   min-height: 340px;
 }
- 
-/* ------------------------------------------------------------------
-   INDIVIDUAL CARD — base state (hidden / off-screen)
-   ------------------------------------------------------------------ */
+
 .tcarousel__card {
   position: absolute;
-  /*
-    Each card is 32% wide. Three cards + two gaps ≈ 100% of the track.
-    Left / center / right positions are computed by JS via CSS custom props.
-  */
   width: 32%;
   top: 0;
- 
-  /* All transitions run together for a smooth sweep */
   transition:
     transform  0.5s cubic-bezier(0.4, 0, 0.2, 1),
     opacity    0.5s cubic-bezier(0.4, 0, 0.2, 1),
     left       0.5s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.5s ease,
-    z-index    0s; /* z-index switches instantly so cards don't cross */
- 
-  /* Off-screen / hidden default */
+    z-index    0s;
   left: 50%;
   opacity: 0;
   transform: translateX(-50%) scale(0.88);
   pointer-events: none;
   z-index: 0;
- 
-  /* Preserve the existing card look */
   cursor: default;
 }
- 
-/* ------------------------------------------------------------------
-   POSITION CLASSES — assigned by JS each render
-   ------------------------------------------------------------------ */
- 
-/* LEFT card — 34% from left edge, faded, slightly smaller */
+
+.tcarousel__card:not(.tcarousel__card--left):not(.tcarousel__card--center):not(.tcarousel__card--right) {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .tcarousel__card--left {
-  left: 2%;            /* sits at the left third */
+  left: 2%;
   opacity: 0.55;
   transform: translateX(0) scale(0.93);
   pointer-events: auto;
   z-index: 1;
-  cursor: pointer;     /* clicking a side card navigates */
+  cursor: pointer;
 }
- 
-/* CENTER card — perfectly centered, full opacity, full scale */
+
 .tcarousel__card--center {
   left: 50%;
   opacity: 1;
@@ -1771,31 +1746,26 @@ body.page-inner .hamburger__line {
   pointer-events: auto;
   z-index: 3;
   box-shadow: 0 20px 50px rgba(15, 31, 23, 0.18),
-              0 0 0 2px rgba(197, 160, 40, 0.25); /* subtle gold ring */
+              0 0 0 2px rgba(197, 160, 40, 0.25);
 }
- 
-/* RIGHT card — mirror of left */
+
 .tcarousel__card--right {
-  left: 66%;           /* sits at the right third */
+  left: 66%;
   opacity: 0.55;
   transform: translateX(0) scale(0.93);
   pointer-events: auto;
   z-index: 1;
   cursor: pointer;
 }
- 
-/* ------------------------------------------------------------------
-   CONTROLS — arrows + dots
-   ------------------------------------------------------------------ */
+
 .tcarousel__controls {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.25rem;
-  margin-top: 2.25rem;
+  margin-top: 1rem;
 }
- 
-/* Arrow buttons use the site's primary green */
+
 .tcarousel__btn {
   display: inline-flex;
   align-items: center;
@@ -1803,90 +1773,51 @@ body.page-inner .hamburger__line {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: var(--primary);      /* #1a3a2a */
+  background: var(--primary);
   color: var(--white);
   border: none;
   cursor: pointer;
   transition: var(--transition);
   box-shadow: 0 4px 16px rgba(26, 58, 42, 0.25);
 }
- 
+
 .tcarousel__btn:hover {
-  background: var(--primary-light); /* #2d5a3d */
+  background: var(--primary-light);
   transform: scale(1.07);
   box-shadow: 0 6px 20px rgba(26, 58, 42, 0.35);
 }
- 
+
 .tcarousel__btn:active {
   transform: scale(0.97);
 }
- 
+
 .tcarousel__btn .material-icons {
   font-size: 1.75rem;
   line-height: 1;
 }
- 
-/* Dot indicators */
+
 .tcarousel__dots {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
- 
+
 .tcarousel__dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--border);        /* #e0ebe4 */
+  background: var(--border);
   border: none;
   cursor: pointer;
   transition: var(--transition);
 }
- 
+
 .tcarousel__dot--active {
   background: var(--primary);
-  width: 22px;                       /* pill shape for active dot */
+  width: 22px;
   border-radius: 9999px;
 }
- 
-/* ------------------------------------------------------------------
-   RESPONSIVE
-   ------------------------------------------------------------------ */
- 
-/* Tablet — show only center + hint of sides */
-@media (max-width: 1024px) {
-  .tcarousel__card {
-    width: 44%;
-  }
-  .tcarousel__card--left {
-    left: -4%;
-    opacity: 0.35;
-  }
-  .tcarousel__card--right {
-    left: 60%;
-    opacity: 0.35;
-  }
-}
- 
-/* Mobile — single card, full width */
-@media (max-width: 640px) {
-  .tcarousel__track {
-    min-height: 380px;
-  }
-  .tcarousel__card {
-    width: 90%;
-  }
-  /* Hide side cards on mobile — too cramped */
-  .tcarousel__card--left,
-  .tcarousel__card--right {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .tcarousel__card--center {
-    left: 50%;
-    transform: translateX(-50%) scale(1);
-  }
-}
+
 /* ==========================================================================
    CONTACT
    ========================================================================== */
@@ -2148,20 +2079,292 @@ body.page-inner .hamburger__line {
   box-shadow: 0 8px 24px rgba(197, 160, 40, 0.3);
 }
 
-/* Compact island on medium desktops */
+/* Smooth rendering on iOS for fixed elements */
+.navbar,
+.modal,
+.scroll-top {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* ==========================================================================
+   UMRAH PAGE — Shared utilities
+   ========================================================================== */
+
+.gold-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 0.45em;
+}
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.section-eyebrow::before {
+  content: '/// ';
+  opacity: 0.5;
+}
+
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.services__title {
+  margin-bottom: 3.5rem;
+}
+
+/* ==========================================================================
+   UMRAH PAGE — Flight & Visa row
+   ========================================================================== */
+
+.services__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  align-items: center;
+  margin-bottom: clamp(3.5rem, 8vw, 7rem);
+}
+
+.services__row-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.services__row-icon-row .material-symbols-outlined {
+  font-size: 3rem;
+  color: var(--gold);
+}
+
+.services__row-icon-row h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.services__row-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.services__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.services__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--primary);
+}
+
+.services__row-img {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.services__row-img img {
+  width: 100%;
+  height: 218px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   UMRAH PAGE — Hotel block
+   ========================================================================== */
+
+.hotel-block {
+  margin: 2rem 0;
+}
+
+.hotel-block__heading {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.hotel-block__heading .material-symbols-outlined {
+  color: var(--gold);
+  font-size: 30px;
+}
+
+.hotel-block__heading h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.hotel-stays {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.hotel-stay {
+  background: var(--off-white);
+  border-left: 4px solid var(--gold);
+  padding: 20px 28px;
+}
+
+.hotel-stay strong {
+  display: block;
+  color: var(--primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.hotel-stay span {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.9375rem;
+}
+
+.hotel-block__photos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.hotel-block__photos img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+/* ==========================================================================
+   UMRAH PAGE — Transport & Special Features (svc-card)
+   — Single authoritative definition, no duplicates
+   ========================================================================== */
+
+.services__two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.svc-card {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  border-radius: var(--radius);
+}
+
+.svc-card__img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
+  display: block;
+}
+
+.svc-card__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.svc-card__heading .material-symbols-outlined {
+  font-size: 1.8rem;
+  color: var(--gold);
+}
+
+.svc-card__heading h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.svc-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  list-style: none;
+  padding: 0;
+}
+
+.svc-card__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--primary);
+}
+
+/* Nested section padding fix */
+.section--off-white .section--white {
+  padding: 0;
+}
+
+.section--off-white .hotel-block {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   ZIYARAT PAGE — 2-tile centered destinations grid
+   ========================================================================== */
+
+[data-page="ziyarat"] .destinations-grid {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================================
+   RESPONSIVE — Medium desktops (768px–1320px)
+   ========================================================================== */
+
 @media (max-width: 1320px) and (min-width: 768px) {
   .nav-link {
     padding: 0.4rem 0.55rem;
     font-size: 0.75rem;
   }
-
   .navbar__logo-img {
     height: 38px;
   }
 }
 
 /* ==========================================================================
-   RESPONSIVE — TABLET (768px - 1024px)
+   RESPONSIVE — TABLET (768px–1024px)
    ========================================================================== */
 
 @media (max-width: 1024px) {
@@ -2169,97 +2372,101 @@ body.page-inner .hamburger__line {
     flex-direction: column;
     gap: 1.5rem;
   }
-
   .travel-partner__nav {
     align-self: flex-end;
   }
-
   .travel-card {
     flex: 0 0 calc(50% - 0.625rem);
     min-height: 360px;
   }
-
   .mission-grid {
     grid-template-columns: 1fr;
   }
-
   .hero__inner {
     grid-template-columns: 1fr;
     text-align: center;
   }
-
   .hero__subtext {
     margin-left: auto;
     margin-right: auto;
   }
-
   .hero__actions {
     justify-content: center;
   }
-
   .hero__trust {
     justify-content: center;
   }
-
   .hero__image {
     max-width: 560px;
     margin: 0 auto;
   }
-
   .packages-grid {
     grid-template-columns: 1fr;
     max-width: 480px;
     margin: 0 auto;
   }
-
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .destinations-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .process-steps {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .process-step:not(:last-child) .process-step__content::after {
     display: none;
   }
-
   .testimonials-grid {
     grid-template-columns: 1fr;
     max-width: 560px;
     margin: 0 auto;
   }
-
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-
   .footer__grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .stats-float {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     padding: 1.75rem 1.5rem;
   }
-
   .plan-journey {
     padding: 7rem 0 4rem;
   }
-
   .plan-journey__fields {
     grid-template-columns: 1fr 1fr;
   }
-
   .plan-journey__submit {
     grid-column: 1 / -1;
     width: 100%;
+  }
+  .tcarousel__card {
+    width: 44%;
+  }
+  .tcarousel__card--left {
+    left: -4%;
+    opacity: 0.35;
+  }
+  .tcarousel__card--right {
+    left: 60%;
+    opacity: 0.35;
+  }
+  .services__row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hotel-block__photos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hotel-block__photos img {
+    height: 150px;
+  }
+  .services__two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 }
 
@@ -2268,66 +2475,58 @@ body.page-inner .hamburger__line {
    ========================================================================== */
 
 @media (max-width: 767px) {
+
   :root {
     --nav-height: 64px;
   }
 
+  /* Prevent horizontal scroll */
+  main {
+    overflow-x: hidden;
+  }
+
+  /* Safe area insets for iPhone notch / home bar */
+  .navbar {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .scroll-top {
+    bottom: max(1.25rem, calc(1.25rem + env(safe-area-inset-bottom, 0px)));
+    right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
+  }
+
+  /* ── NAVBAR ── */
   .navbar__inner {
     padding: 0.75rem 0;
-  }
-
-  .navbar__logo-img {
-    height: 36px;
-  }
-
-  .section {
-    padding: 4rem 0;
-  }
-
-  .travel-partner__header {
-    margin-bottom: 2rem;
-  }
-
-  .travel-card {
-    flex: 0 0 100%;
-    min-height: 340px;
-  }
-
-  .travel-card__content {
-    padding: 1.5rem 1.5rem 1.75rem;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .navbar__cta {
-    display: none;
-  }
-
-  .navbar__logo {
-    border-right: none;
-    margin-right: 0;
-    padding-right: 0;
-  }
-
-  .navbar__cta {
-    border-left: none;
-    margin-left: 0;
-    padding-left: 0;
   }
 
   .navbar__island {
     justify-content: space-between;
     width: calc(100% - 1.5rem);
-    max-width: 420px;
-    padding: 0.4rem 0.5rem 0.4rem 0.75rem;
+    max-width: 430px;
+    padding: 0.2rem 0.5rem 0.2rem 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .navbar__logo {
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 0;
+    border-right: none;
+  }
+
+  .navbar__logo-img {
+    height: 28px;
   }
 
   .navbar__nav {
     display: none;
     width: 100%;
     order: 10;
+  }
+
+  .navbar__cta {
+    display: none;
   }
 
   .navbar__cta-mobile {
@@ -2337,33 +2536,64 @@ body.page-inner .hamburger__line {
     margin-top: 0.25rem;
   }
 
-  .navbar__island.navbar__island--open {
-    flex-wrap: wrap;
-    border-radius: var(--radius-lg);
-    padding: 0.75rem;
-    max-width: calc(100% - 1.5rem);
+  .hamburger {
+    display: flex;
   }
 
-  .navbar__island.navbar__island--open .navbar__nav,
-  .navbar__island.navbar__island--open .navbar__cta-mobile {
+  .navbar__island.navbar__island--open {
+    flex-wrap: wrap;
+    border-radius: 20px;
+    padding: 0.75rem 0.75rem 1rem;
+    width: calc(100% - 1.5rem);
+    max-width: 430px;
+    margin-top: 0.5rem;
+    gap: 0;
+  }
+
+  .navbar__island.navbar__island--open .navbar__logo {
+    flex: 1;
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+
+  .navbar__island.navbar__island--open .navbar__nav {
     display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(26, 58, 42, 0.1);
+    padding-top: 0.5rem;
   }
 
   .navbar__island.navbar__island--open .navbar__cta-mobile {
     display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(26, 58, 42, 0.1);
+    padding-top: 0.75rem;
+  }
+
+  .navbar__cta-mobile.btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .navbar__links {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.35rem;
+    gap: 0.125rem;
     width: 100%;
   }
 
   .nav-link {
-    text-align: center;
-    padding: 0.75rem 1rem;
-    font-size: 0.9375rem;
+    text-align: left;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
   }
 
   body.page-inner .nav-link,
@@ -2377,49 +2607,134 @@ body.page-inner .hamburger__line {
     background: var(--primary);
   }
 
-  .hero__title {
-    font-size: clamp(2.25rem, 10vw, 3rem);
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding-top: calc(var(--nav-height) + 2.5rem);
+    padding-bottom: 2.5rem;
+    min-height: 260px;
   }
 
+  .page-hero--image {
+    min-height: 210px;
+  }
+
+  .page-hero__title {
+    font-size: clamp(1.25rem, 5vw, 1.6rem);
+    line-height: 1.2;
+  }
+
+  .page-hero__subtext {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  /* ── TYPOGRAPHY — 20% reduced ── */
   .hero__title--banner {
-    font-size: clamp(1.875rem, 8vw, 2.5rem);
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
   }
 
+  .section-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    word-break: break-word;
+  }
+
+  .section-subtext {
+    font-size: 0.9rem;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+  }
+
+  .plan-journey__title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .plan-journey__subtext {
+    font-size: 0.875rem;
+  }
+
+  .package-card__price strong {
+    font-size: 1.4rem;
+  }
+
+  .package-card__title {
+    font-size: 1rem;
+  }
+
+  .package-card__meta,
+  .facility {
+    font-size: 0.7rem;
+  }
+
+  .feature-tile__title {
+    font-size: 0.875rem;
+  }
+
+  .feature-tile__desc {
+    font-size: 0.7rem;
+  }
+
+  .process-step__title {
+    font-size: 0.875rem;
+  }
+
+  .process-step__desc {
+    font-size: 0.7rem;
+  }
+
+  .process-step__number {
+    font-size: 2.2rem;
+  }
+
+  .testimonial-card__text {
+    font-size: 0.75rem;
+  }
+
+  .testimonial-card__author {
+    font-size: 0.7rem;
+  }
+
+  .btn {
+    font-size: 0.8125rem;
+    padding: 0.75rem 1.4rem;
+  }
+
+  .footer__tagline {
+    font-size: 0.7rem;
+  }
+
+  .footer__links li {
+    font-size: 0.7rem;
+  }
+
+  .footer__heading {
+    font-size: 0.65rem;
+  }
+
+  .feature-tile__icon {
+    font-size: 1.6rem;
+  }
+
+  .mission-card__icon {
+    font-size: 1.6rem;
+  }
+
+  /* ── HERO ── */
   .hero--banner {
-    min-height: auto;
+    min-height: 70vh;
     padding-bottom: 3.5rem;
   }
 
   .hero__banner-wrap {
     padding-bottom: 2rem;
-  }
-
-  .stats-float-wrap {
-    margin-top: -3.5rem;
-    margin-bottom: -2rem;
-  }
-
-  .stats-float {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    padding: 1.5rem 1.25rem;
-  }
-
-  .plan-journey {
-    padding: 6.5rem 0 3.5rem;
-  }
-
-  .plan-journey-form {
-    padding: 1.25rem;
-  }
-
-  .plan-journey__fields {
-    grid-template-columns: 1fr;
-  }
-
-  .plan-journey__submit {
-    width: 100%;
-    justify-content: center;
   }
 
   .hero__actions {
@@ -2428,6 +2743,69 @@ body.page-inner .hamburger__line {
 
   .hero__actions .btn {
     width: 100%;
+  }
+
+  /* ── STATS FLOAT ── */
+  .stats-float-wrap {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .stats-float {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .stats-float .stat-item__number,
+  .stats-float .stat-item__suffix {
+    font-size: clamp(1.4rem, 5.5vw, 1.75rem);
+  }
+
+  .stats-float .stat-item__label {
+    font-size: 0.6rem;
+    margin-top: 0.375rem;
+  }
+
+  /* ── PLAN JOURNEY ── */
+  .plan-journey {
+    padding: 6.5rem 0 3.5rem;
+  }
+
+  .plan-journey-form {
+    padding: 1.25rem 1rem;
+  }
+
+  .plan-journey__fields {
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  .plan-journey__submit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── GRIDS ── */
+  .packages-grid {
+    max-width: 100%;
+  }
+
+  .package-card {
+    padding: 1.75rem;
+  }
+
+  .package-badge,
+  .package-card__sharing {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .book-package-btn,
+  .btn--full {
+    min-height: 48px;
   }
 
   .features-grid {
@@ -2440,1086 +2818,286 @@ body.page-inner .hamburger__line {
 
   .process-steps {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 0.875rem;
   }
 
+  /* ── TRAVEL CARDS ── */
+  .travel-partner__header {
+    margin-bottom: 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .travel-card {
+    flex: 0 0 100%;
+    min-height: 270px;
+  }
+
+  .travel-card__content {
+    padding: 1.5rem 1.5rem 1.75rem;
+  }
+
+  /* ── CAROUSEL ── */
+  .tcarousel__track {
+    min-height: 260px;
+  }
+
+  .tcarousel__card {
+    width: 88%;
+  }
+
+  .tcarousel__card--left,
+  .tcarousel__card--right {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tcarousel__card--center {
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+  }
+
+  .tcarousel__btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .tcarousel__btn .material-icons {
+    font-size: 1.5rem;
+  }
+
+  .tcarousel__controls {
+    margin-top: 0.5rem;
+    gap: 1rem;
+  }
+
+  /* ── UMRAH — SERVICES ROW ── */
+  .services__row {
+    grid-template-columns: 1fr;
+  }
+
+  .services__row-img {
+    margin-top: 1.25rem;
+  }
+
+  .services__row-img img {
+    height: 130px;
+  }
+
+  .services__list {
+    grid-template-columns: 1fr;
+  }
+
+  .services__row-icon-row h3,
+  .hotel-block__heading h3,
+  .svc-card__heading h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 3;
+  }
+
+  .services__row-icon-row .material-symbols-outlined,
+  .hotel-block__heading .material-symbols-outlined,
+  .svc-card__heading .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+
+  .services__list li,
+  .svc-card__list li {
+    font-size: 0.75rem;
+  }
+
+  /* ── UMRAH — HOTEL BLOCK ── */
+  .hotel-stays {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hotel-stay {
+    padding: 14px 16px;
+  }
+
+  .hotel-stay strong {
+    font-size: 1rem;
+  }
+
+  .hotel-stay span {
+    font-size: 0.75rem;
+  }
+
+  .hotel-block__photos {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .hotel-block__photos img {
+    height: 110px;
+  }
+
+  /* ── UMRAH — SVC CARDS (Transport & Special) ── */
+  .services__two-col {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .svc-card {
+    padding: 1.25rem;
+  }
+
+  .svc-card__img {
+    width: 100%;
+    height: 110px;
+    margin-bottom: 1rem;
+  }
+
+  /* ── FOOTER ── */
   .footer__grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
   }
 
+  .footer {
+    padding-top: 3rem;
+  }
+
+  .footer__logo-img {
+    height: 38px;
+  }
+
+  /* ── MODAL ── */
   .modal__dialog {
-    padding: 1.75rem;
+    padding: 1.5rem 1.25rem;
+    max-height: 95vh;
+    border-radius: var(--radius);
   }
 
+  .modal__close {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* ── SCROLL TOP ── */
   .scroll-top {
+    width: 38px;
+    height: 38px;
     bottom: 1.25rem;
     right: 1.25rem;
   }
 }
 
 /* ==========================================================================
-   ZIYARAT PAGE — 2-tile centered destinations grid override
+   RESPONSIVE — 320px to 375px (iPhone SE / small Android)
    ========================================================================== */
 
-[data-page="ziyarat"] .destinations-grid {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 860px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/*adding new style for umrah page */
-
-/* --- Shared utilities used by this section --- */
-.gold-dot {
-  display: inline-block;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--clr-gold);
-  flex-shrink: 0;
-  margin-top: 0.45em;
-}
-
-.section-eyebrow {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--clr-gold);
-  margin-bottom: 0.75rem;
-}
-.section-eyebrow::before { content: '/// '; opacity: 0.5; }
-
-.section-title {
-  font-family: var(--ff-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 600;
-  color: var(--clr-primary);
-  line-height: 1.15;
-  margin-bottom: 0.75rem;
-}
-
-.section-sub {
-  font-size: 1.05rem;
-  color: var(--clr-text-muted);
-}
-
-/* --- Section header --- */
-.services__title { margin-bottom: 3.5rem; }
-
-/* --- Flight & Visa row --- */
-.services__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gutter);
-  align-items: center;
-  margin-bottom: var(--section-pad);
-}
-
-.services__row-icon-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-.services__row-icon-row .material-symbols-outlined {
-  font-size: 2.5rem;
-  color: var(--clr-gold);
-}
-.services__row-icon-row h3 {
-  font-family: var(--ff-display);
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--clr-primary);
-}
-
-.services__row-desc {
-  font-size: 1rem;
-  color: var(--clr-text-muted);
-  line-height: 1.75;
-  margin-bottom: 1.5rem;
-}
-
-.services__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-.services__list li {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--clr-primary);
-}
-
-.services__row-img {
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid var(--clr-border);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-}
-.services__row-img img { width: 100%; height: auto; object-fit: cover; }
-
-/* --- Hotel block --- */
-.hotel-block { margin-bottom: var(--section-pad); }
-
-.hotel-block__top {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.hotel-block__heading {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-.hotel-block__heading .material-symbols-outlined { font-size: 2.5rem; color: var(--clr-gold); }
-.hotel-block__heading h3 {
-  font-family: var(--ff-display);
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--clr-primary);
-}
-
-.hotel-block__sub { font-size: 1rem; color: var(--clr-text-muted); }
-
-.hotel-block__stays {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.hotel-stay {
-  background: var(--clr-surface-mid);
-  padding: 1.1rem 1.25rem;
-  border-left: 4px solid var(--clr-gold);
-}
-.hotel-stay strong {
-  display: block;
-  font-weight: 700;
-  color: var(--clr-primary);
-  font-size: 0.9rem;
-  margin-bottom: 0.25rem;
-}
-.hotel-stay span { font-size: 0.875rem; color: var(--clr-text-muted); line-height: 1.5; }
-
-.hotel-block__photos {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-}
-.hotel-block__photos img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius);
-  transition: transform 0.45s ease;
-}
-.hotel-block__photos img:hover { transform: scale(1.04); }
-
-/* --- Transport & Special Features cards --- */
-.services__two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gutter);
-}
-
-.svc-card {
-  background: var(--clr-surface-low);
-  border: 1px solid var(--clr-border);
-  padding: var(--card-pad);
-}
-
-.svc-card__img {
-  width: 50%;
-  height: 200px;
-  object-fit: cover;
-  border: 1px solid var(--clr-border);
-  margin: 0 auto 1.5rem auto;
-  display: block;
-  border-radius: var(--radius);
-}
-
-.svc-card__heading {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
-}
-.svc-card__heading .material-symbols-outlined { 
-  font-size: 1.8rem; 
-  color: var(--clr-gold);
-}
-.svc-card__heading h3 {
-  font-family: var(--ff-display);
-  font-size: 1.45rem;
-  font-weight: 600;
-  color: var(--clr-primary);
-}
-
-.svc-card__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-.svc-card__list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--clr-primary);
-}
-
-/* --- Responsive --- */
-@media (max-width: 860px) {
-  .services__row       { grid-template-columns: 1fr; }
-  .services__two-col   { grid-template-columns: 1fr; }
-  .hotel-block__stays  { grid-template-columns: 1fr; }
-  .hotel-block__photos { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 560px) {
-  .hotel-block__photos { grid-template-columns: 1fr 1fr; }
-}
-
-/* 2nd thing that i am going to add */
-
-/* ============================================================
-   GreenDome Travel & Tours — Inclusive Services CSS
-   ============================================================ */
-
-/* ---------- Container & Common Styles ---------- */
-.section-eyebrow {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #B8860B; /* --clr-gold */
-  margin-bottom: 0.75rem;
-}
-
-.section-eyebrow::before {
-  content: '/// ';
-  opacity: 0.5;
-}
-
-.section-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 600;
-  color: #1A4731; /* --clr-primary */
-  line-height: 1.15;
-  margin-bottom: 3.5rem;
-}
-
-.section--dark .section-title {
-    color: #ffffff;
-}
-
-.gold-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #B8860B;
-  flex-shrink: 0;
-}
-
-/* ---------- Flight & Visa Row ---------- */
-.services__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.25rem, 4vw, 3rem); /* --gutter */
-  align-items: center;
-  margin-bottom: clamp(3.5rem, 8vw, 7rem); /* --section-pad */
-}
-
-.services__row-icon-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-
-.services__row-icon-row .material-symbols-outlined {
-  font-size: 3.0rem;
-  color: #B8860B;
-}
-
-.services__row-icon-row h3 {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 650;
-  color: #1A4731;
-}
-
-.services__list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.65rem;
-}
-
-.services__list li {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #1A4731;
-}
-
-.services__row-img {
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid #D9D3C7; /* --clr-border */
-  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-}
-
-.services__row-img img {
-  width: 100%;
-  height: 218px;
-  display: block;
-}
-
-/* ---------- Hotel Block ---------- */
-.hotel-block {
-  margin: 40px 0;
-}
-
-.hotel-block__heading {
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 25px;
-}
-
-.hotel-block__heading .material-symbols-outlined {
-  color: #c08a00;
-  font-size: 30px;
-}
-
-.hotel-block__heading h3 {
-  margin: 0;
-  color: #184b3d;
-  font-size: 2.4rem;
-  font-weight: 650;
-}
-
-/* Makkah + Madinah Cards */
-
-.hotel-stays {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  margin-bottom: 30px;
-}
-
-.hotel-stay {
-  background: var(--clr-surface-low, #F7F5F0);
-  border-left: 4px solid #c08a00;
-  padding: 20px 28px;
-}
-
-.hotel-stay strong {
-  display: block;
-  color: #184b3d;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.hotel-stay span {
-  color: #666;
-  line-height: 1.6;
-  font-size: 1rem;
-}
-
-/* Hotel Images */
-
-.hotel-block__photos {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-.hotel-block__photos img {
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  display: block;
-}
-
-/* ---------- Responsive Adjustments ---------- */
-@media (max-width: 860px) {
-  .services__row {
-    grid-template-columns: 1fr;
-  }
-  .hotel-block__stays {
-    grid-template-columns: 1fr;
-  }
-  .hotel-block__photos {
-    grid-template-columns: 1fr 1fr;
-  }
-  .services__list {
-    grid-template-columns: 1fr;
-  }
-}
-
-
- /* new part that i add */
-
- .services__two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gutter, 2.5rem);
-  padding: 20px 28px;
-}
-.svc-card {
-  background: var(--clr-surface-low, #F7F5F0);
-  border: 1px solid var(--clr-border, #D9D3C7);
-  padding: 2rem;
-  border-radius: 4px;
-}
-.svc-card__img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border: 1px solid var(--clr-border, #D9D3C7);
-  margin-bottom: 1.5rem;
-  border-radius: 4px;
-}
-.svc-card__heading {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
-}
-.svc-card__heading .material-symbols-outlined {
-  font-size: 1.8rem;
-  color: var(--clr-gold, #B8860B);
-}
-.svc-card__heading h3 {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.45rem;
-  font-weight: 650;
-  color: var(--clr-primary, #1A4731);
-}
-.svc-card__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  list-style: none;
-  padding: 0;
-}
-.svc-card__list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--clr-primary, #1A4731);
-}
-.gold-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--clr-gold, #B8860B);
-  flex-shrink: 0;
-  margin-top: 0.45em;
-}
-@media (max-width: 860px) {
-  .services__two-col { grid-template-columns: 1fr; }
-}
-
-
-
-
-
-Mobile fix
-Code · CSS 
-
-
-
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-Mobile fix · CSS
-/*
-============================================================================
-  GREENDOME — MOBILE RESPONSIVENESS FIX PATCH
-  File: append this to the BOTTOM of css/style.css
-  
-  Audit issues addressed (12 root causes → targeted fixes):
-  
-  ISSUE 1: .section-title redefined twice → cascade conflict on font-weight
-            and margin-bottom overriding base styles site-wide.
-  ISSUE 2: Nested section.section--white inside section.section--off-white
-            doubles vertical padding (~20rem gap on mobile).
-  ISSUE 3: Mobile nav island open state causes overflow, cramped links,
-            and inconsistent spacing on 360–430px viewports.
-  ISSUE 4: --nav-height (64px) used for hero padding but open drawer exceeds
-            64px, making page-hero start below the menu.
-  ISSUE 5: .page-hero padding too tall on mobile (wastes ~40% screen height).
-  ISSUE 6: services__two-col has padding: 20px 28px causing horizontal bleed.
-  ISSUE 7: hotel-block__photos height: 210px never overridden on small screens.
-  ISSUE 8: tcarousel overflow:hidden clips center card's gold box-shadow.
-  ISSUE 9: tcarousel__track min-height insufficient when cards wrap on narrow.
-  ISSUE 10: .services__list grid-template-columns: 1fr 1fr wraps badly <360px.
-  ISSUE 11: font-weight: 650 invalid CSS value → normalize to 700.
-  ISSUE 12: Safe area insets missing for iPhone notch/home-bar areas.
-============================================================================
-*/
- 
-/* ============================================================
-   FIX 1 — Resolve .section-title cascade conflict
-   Root: The umrah-specific block redefines .section-title with
-   font-weight:600 and margin-bottom:3.5rem, overriding the
-   base definition (font-weight:800, margin-bottom:1rem) for
-   EVERY page that loads style.css. Scoping it to umrah page
-   via body[data-page="umrah"] prevents cross-page breakage.
-   ============================================================ */
- 
-/* Revert the rogue global overrides */
-.section-title {
-  font-weight: 800;        /* restore base */
-  margin-bottom: 1rem;     /* restore base */
-}
- 
-/* Apply umrah-specific title treatment only on that page */
-body[data-page="umrah"] .section-eyebrow ~ .section-title,
-body[data-page="umrah"] .services__row h3,
-body[data-page="umrah"] .hotel-block__heading h3,
-body[data-page="umrah"] .svc-card__heading h3 {
-  font-weight: 700;        /* valid value; visually same as 650 → 600 */
-}
- 
-/* ============================================================
-   FIX 2 — Collapse double-padding from nested sections
-   Root: section.section--white sits *inside* section.section--off-white.
-   Both fire padding:6rem 0. The fix removes the inner section's
-   padding so it inherits from its parent container instead.
-   ============================================================ */
- 
-/* The inner services section on umrah.html */
-.section--off-white .section--white {
-  padding: 0;             /* zeroed — outer .section--off-white already pads */
-}
- 
-/* Also clean up the hotel-block's own margin collision */
-.section--off-white .hotel-block {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
- 
-/* services__two-col bleed fix (Issue 6) */
-.services__two-col {
-  padding: 0;             /* remove the 20px 28px that caused side bleed */
-  gap: 1.25rem;
-}
- 
-/* ============================================================
-   FIX 3 + 4 — Mobile navbar open drawer
-   Root: The island flex-wraps with generous padding and the
-   open height is unbounded, breaking scroll-padding and hero
-   positioning. Fix: tighter padding, smaller logo, links use
-   full-width rows with consistent tap targets.
-   ============================================================ */
- 
-@media (max-width: 767px) {
- 
-  /* Tighter closed state */
-  .navbar__island {
-    padding: 0.35rem 0.5rem 0.35rem 0.75rem;
-    width: calc(100% - 1.5rem);
-    max-width: 430px;
-  }
- 
-  /* Logo in closed state — smaller to give more room to hamburger */
-  .navbar__logo {
-    padding-left: 0;
-    padding-right: 0;
-    margin-right: 0;
-    border-right: none;
-  }
- 
-  .navbar__logo-img {
-    height: 34px;          /* was 36px — minor but helps at 360px */
-  }
- 
-  /* Open drawer shell */
-  .navbar__island.navbar__island--open {
-    flex-wrap: wrap;
-    border-radius: 20px;
-    padding: 0.75rem 0.75rem 1rem;
-    width: calc(100% - 1.5rem);
-    max-width: 430px;
-    gap: 0;
-  }
- 
-  /* Row 1 of open island: logo + hamburger */
-  .navbar__island.navbar__island--open .navbar__logo {
-    flex: 1;
-    border-right: none;
-    padding-right: 0;
-    margin-right: 0;
-  }
- 
-  /* Nav links column inside open drawer */
-  .navbar__island.navbar__island--open .navbar__nav {
-    display: block;
-    width: 100%;
-    margin-top: 0.5rem;
-    border-top: 1px solid rgba(26, 58, 42, 0.1);
-    padding-top: 0.5rem;
-  }
- 
-  .navbar__links {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.125rem;            /* tighter rows — was 0.35rem */
-    width: 100%;
-  }
- 
-  .nav-link {
-    text-align: left;          /* left-aligned feels more native on mobile */
-    padding: 0.625rem 0.875rem; /* 44px touch target maintained via min-height below */
-    font-size: 0.9375rem;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-  }
- 
-  /* Book Now inside drawer */
-  .navbar__island.navbar__island--open .navbar__cta-mobile {
-    display: inline-flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: 0.75rem;
-    border-top: 1px solid rgba(26, 58, 42, 0.1);
-    padding-top: 0.75rem;
-  }
- 
-  .navbar__cta-mobile.btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
- 
-/* ============================================================
-   FIX 5 — page-hero height on mobile
-   Root: calc(64px + 4rem) top padding + 4rem bottom = ~160px
-   of empty hero space before content. Reduced to breathable
-   but not wasteful values.
-   ============================================================ */
- 
-@media (max-width: 767px) {
-  .page-hero {
-    padding-top: calc(var(--nav-height) + 2.5rem);
-    padding-bottom: 2.5rem;
-    min-height: 260px;
-  }
- 
-  .page-hero--image {
-    min-height: 260px;
-  }
- 
-  .page-hero__title {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-    line-height: 1.2;
-  }
- 
-  .page-hero__subtext {
-    font-size: 0.9375rem;
-    margin-top: 0.5rem;
-  }
-}
- 
-/* ============================================================
-   FIX 7 — Hotel photos height on small screens
-   Root: height: 210px hard-coded never adjusts below 560px,
-   making images either distorted or too small.
-   ============================================================ */
- 
-@media (max-width: 560px) {
-  .hotel-block__photos img {
-    height: 140px;
-  }
-}
- 
-@media (max-width: 400px) {
-  .hotel-block__photos img {
-    height: 120px;
-  }
-}
- 
-/* ============================================================
-   FIX 8 — Carousel box-shadow clipping
-   Root: overflow:hidden on .tcarousel hides the center card's
-   elevated box-shadow. Use clip-path trick: allow overflow but
-   clip only the sides via padding compensation.
-   ============================================================ */
- 
-.tcarousel {
-  overflow: visible;         /* allow shadow to render */
-  /* Contain the visible area so side cards don't scroll horizontally */
-  clip-path: inset(-40px 0px);   /* clip top/bottom generously, no side clip */
-}
- 
-/* Re-hide truly off-screen cards (not just unfocused ones) */
-.tcarousel__card:not(.tcarousel__card--left):not(.tcarousel__card--center):not(.tcarousel__card--right) {
-  visibility: hidden;
-  pointer-events: none;
-}
- 
-/* ============================================================
-   FIX 9 — Carousel track height adapts to card content
-   Root: min-height:340px fixed; on narrow screens card text
-   wraps and exceeds this, causing bottom content cutoff.
-   ============================================================ */
- 
-.tcarousel__track {
-  min-height: 340px;
-}
- 
-@media (max-width: 767px) {
-  .tcarousel__track {
-    min-height: 360px;
-  }
-}
- 
-@media (max-width: 400px) {
-  .tcarousel__track {
-    min-height: 400px;
-  }
-}
- 
-/* ============================================================
-   FIX 10 — services__list two-column grid below 360px
-   Root: grid-template-columns: 1fr 1fr wraps badly at 320px.
-   ============================================================ */
- 
-@media (max-width: 380px) {
-  .services__list {
-    grid-template-columns: 1fr;
-  }
-}
- 
-/* ============================================================
-   FIX 12 — iPhone safe area insets (notch + home bar)
-   Root: Fixed navbar and scroll-top button overlap notch/home
-   bar on iPhones with iOS safe area. env() variables fix this.
-   ============================================================ */
- 
-@supports (padding: max(0px)) {
-  .navbar {
-    padding-top: env(safe-area-inset-top, 0px);
-  }
- 
-  .scroll-top {
-    bottom: max(1.25rem, calc(1.25rem + env(safe-area-inset-bottom, 0px)));
-    right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
-  }
-}
- 
-/* ============================================================
-   GRANULAR BREAKPOINTS
-   320px–375px  |  376px–430px  |  431px–767px  |  768px+
-   ============================================================ */
- 
-/* --- 320px to 375px: smallest Android + iPhone SE/mini --- */
 @media (max-width: 375px) {
- 
-  /* Tighter container edge padding */
   .container {
-    padding: 0 1rem;
+    padding: 0.5rem;
   }
- 
-  /* Section padding reduced further */
   .section {
     padding: 3rem 0;
   }
- 
-  /* Package cards */
-  .packages-grid {
-    max-width: 100%;
+  .hero__title--banner {
+    font-size: clamp(1.25rem, 6vw, 1.75rem);
   }
- 
+  .section-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
   .package-card {
     padding: 1.5rem;
   }
- 
   .package-card__price strong {
     font-size: 1.5rem;
   }
- 
-  /* Process steps */
   .process-step__number {
     font-size: 2.25rem;
   }
- 
-  /* Carousel: card slightly wider */
   .tcarousel__card {
     width: 92%;
   }
- 
-  /* Hotel stays stack tighter */
+  .tcarousel__track {
+    min-height: 300px;
+  }
   .hotel-stay {
-    padding: 14px 16px;
+    padding: 12px 14px;
   }
- 
   .hotel-stay strong {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
- 
   .hotel-stay span {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
+  }
+  .svc-card__img {
+    height: 90px;
+  }
+  .hotel-block__photos img {
+    height: 90px;
+  }
+  .services__row-img img {
+    height: 110px;
+  }
+  .services__list {
+    grid-template-columns: 1fr;
   }
 }
- 
-/* --- 376px to 430px: iPhone 12 Pro, 13, 14, 15 --- */
+
+/* ==========================================================================
+   RESPONSIVE — 376px to 430px (iPhone 12 Pro / 13 / 14 / 15)
+   ========================================================================== */
+
 @media (min-width: 376px) and (max-width: 430px) {
- 
   .container {
     padding: 0 1.25rem;
   }
- 
   .section {
     padding: 3.5rem 0;
   }
- 
   .package-card {
     padding: 1.75rem;
   }
- 
-  /* Two-column grid for hotel stays works well here */
   .hotel-stays {
     grid-template-columns: repeat(2, 1fr);
   }
- 
-  /* svc-card images: full width at this size */
   .svc-card__img {
-    height: 170px;
+    height: 110px;
   }
- 
-  /* Carousel: standard mobile single-card */
   .tcarousel__card {
     width: 88%;
   }
+  .tcarousel__track {
+  min-height: 250px;
 }
- 
-/* --- 431px to 767px: large phones / small tablets --- */
+
+.tcarousel__controls {
+  margin-top: 0.25rem;
+}
+}
+
+/* ==========================================================================
+   RESPONSIVE — 431px to 767px (large phones / small tablets)
+   ========================================================================== */
+
 @media (min-width: 431px) and (max-width: 767px) {
- 
-  /* Side cards become faintly visible as a peek */
   .tcarousel__card {
     width: 72%;
   }
- 
   .tcarousel__card--left {
     left: -6%;
     opacity: 0.3;
   }
- 
   .tcarousel__card--right {
     left: 78%;
     opacity: 0.3;
   }
- 
   .hotel-stays {
     grid-template-columns: repeat(2, 1fr);
   }
-}
- 
-/* --- 768px+: tablet and up --- */
-@media (min-width: 768px) and (max-width: 1024px) {
- 
-  /* Restore side card visibility on tablet */
-  .tcarousel__card {
-    width: 44%;
-  }
- 
-  .tcarousel__card--left {
-    left: -2%;
-    opacity: 0.4;
-  }
- 
-  .tcarousel__card--right {
-    left: 58%;
-    opacity: 0.4;
-  }
- 
-  /* Services row: still 2-col down to 768px */
-  .services__row {
-    grid-template-columns: 1fr 1fr;
-  }
- 
-  /* Hotel photos: 2-col on tablet */
-  .hotel-block__photos {
-    grid-template-columns: repeat(2, 1fr);
-  }
- 
-  .hotel-block__photos img {
-    height: 180px;
-  }
- 
-  /* Two-col svc cards: full width with comfortable gap */
-  .services__two-col {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-}
- 
-/* ============================================================
-   MISC POLISH — applies across all mobile breakpoints
-   ============================================================ */
- 
-/* Prevent any element from causing horizontal scroll */
-main {
-  overflow-x: hidden;
-}
- 
-/* Consistent touch targets for all interactive elements */
-.book-package-btn,
-.btn--full {
-  min-height: 48px;
-}
- 
-/* Prevent badge text overflow on very narrow cards */
-.package-badge,
-.package-card__sharing {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
- 
-/* Smooth rendering on iOS for fixed elements */
-.navbar,
-.modal,
-.scroll-top {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
- 
-/* svc-card image: remove the 50% width rule that made it odd on mobile */
-@media (max-width: 767px) {
   .svc-card__img {
-    width: 100%;
-    height: 180px;
-    margin-bottom: 1.25rem;
-  }
- 
-  .svc-card {
-    padding: 1.5rem;
-  }
- 
-  .services__two-col {
-    grid-template-columns: 1fr;
-  }
- 
-  .hotel-stays {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
- 
-  /* Services list: full-width single column on mobile */
-  .services__list {
-    grid-template-columns: 1fr;
-  }
- 
-  /* Flight & visa row: text first, image second */
-  .services__row {
-    grid-template-columns: 1fr;
-  }
- 
-  .services__row-img {
-    margin-top: 1.25rem;
-  }
- 
-  .services__row-img img {
-    height: 200px;
-    object-fit: cover;
-    width: 100%;
-  }
- 
-  /* Carousel controls: slightly smaller but still 44px touch target */
-  .tcarousel__btn {
-    width: 44px;
-    height: 44px;
-  }
- 
-  .tcarousel__btn .material-icons {
-    font-size: 1.5rem;
-  }
- 
-  .tcarousel__controls {
-    margin-top: 1.75rem;
-    gap: 1rem;
-  }
- 
-  /* Process steps: full width stack */
-  .process-steps {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
- 
-  /* Form grid: single column */
-  .form-grid {
-    grid-template-columns: 1fr;
-    gap: 0.875rem;
-  }
- 
-  /* Modal dialog: tighter on small screens */
-  .modal__dialog {
-    padding: 1.5rem 1.25rem;
-    max-height: 95vh;
-    border-radius: var(--radius);
-  }
- 
-  /* Stats float: ensure 2-col stays tight */
-  .stats-float {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    padding: 1.25rem 1rem;
-  }
- 
-  .stats-float .stat-item__number,
-  .stats-float .stat-item__suffix {
-    font-size: clamp(1.75rem, 7vw, 2.25rem);
-  }
- 
-  /* Plan journey form */
-  .plan-journey-form {
-    padding: 1.25rem 1rem;
-  }
- 
-  .plan-journey__fields {
-    grid-template-columns: 1fr;
-    gap: 0.875rem;
-  }
- 
-  /* Footer: single column, tighter */
-  .footer__grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-  }
- 
-  .footer {
-    padding-top: 3rem;
+    height: 120px;
   }
 }
