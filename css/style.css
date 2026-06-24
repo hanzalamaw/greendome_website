@@ -2480,8 +2480,24 @@ body.page-inner .hamburger__line {
     --nav-height: 64px;
   }
 
-  /* Prevent horizontal scroll */
-  main {
+  /* ── GLOBAL OVERFLOW PREVENTION ── */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Prevent horizontal scroll on all major layout containers */
+  main,
+  .section,
+  .hero,
+  .hero--banner,
+  .page-hero,
+  .cta-banner,
+  .marquee,
+  .footer,
+  .plan-journey,
+  .stats-float-wrap,
+  .tcarousel {
     overflow-x: hidden;
   }
 
@@ -2493,6 +2509,38 @@ body.page-inner .hamburger__line {
   .scroll-top {
     bottom: max(1.25rem, calc(1.25rem + env(safe-area-inset-bottom, 0px)));
     right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
+  }
+
+  /* ── CONTAINER — consistent 20px side padding ── */
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── GLOBAL CARD / BLOCK SAFETY ──
+     Ensures nothing bleeds past the viewport regardless of how
+     nested or positioned each component is.                     */
+  .package-card,
+  .feature-tile,
+  .mission-card,
+  .testimonial-card,
+  .process-step__content,
+  .svc-card,
+  .hotel-stay,
+  .contact-info,
+  .form-section,
+  .plan-journey-form,
+  .package-includes,
+  .destination-tile,
+  .travel-card,
+  .stats-float,
+  .footer__grid > *,
+  .section-header {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   /* ── NAVBAR ── */
@@ -2633,9 +2681,9 @@ body.page-inner .hamburger__line {
     padding: 3.5rem 0;
   }
 
-  /* ── TYPOGRAPHY — 20% reduced ── */
-  .hero__title--banner {
-    font-size: clamp(1.5rem, 6.5vw, 2rem);
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 2rem;
   }
 
   .section-title {
@@ -2647,84 +2695,11 @@ body.page-inner .hamburger__line {
 
   .section-subtext {
     font-size: 0.9rem;
+    max-width: 100%;
   }
 
   .section-label {
     font-size: 0.65rem;
-  }
-
-  .plan-journey__title {
-    font-size: clamp(1.4rem, 3vw, 2rem);
-  }
-
-  .plan-journey__subtext {
-    font-size: 0.875rem;
-  }
-
-  .package-card__price strong {
-    font-size: 1.4rem;
-  }
-
-  .package-card__title {
-    font-size: 1rem;
-  }
-
-  .package-card__meta,
-  .facility {
-    font-size: 0.7rem;
-  }
-
-  .feature-tile__title {
-    font-size: 0.875rem;
-  }
-
-  .feature-tile__desc {
-    font-size: 0.7rem;
-  }
-
-  .process-step__title {
-    font-size: 0.875rem;
-  }
-
-  .process-step__desc {
-    font-size: 0.7rem;
-  }
-
-  .process-step__number {
-    font-size: 2.2rem;
-  }
-
-  .testimonial-card__text {
-    font-size: 0.75rem;
-  }
-
-  .testimonial-card__author {
-    font-size: 0.7rem;
-  }
-
-  .btn {
-    font-size: 0.8125rem;
-    padding: 0.75rem 1.4rem;
-  }
-
-  .footer__tagline {
-    font-size: 0.7rem;
-  }
-
-  .footer__links li {
-    font-size: 0.7rem;
-  }
-
-  .footer__heading {
-    font-size: 0.65rem;
-  }
-
-  .feature-tile__icon {
-    font-size: 1.6rem;
-  }
-
-  .mission-card__icon {
-    font-size: 1.6rem;
   }
 
   /* ── HERO ── */
@@ -2734,7 +2709,11 @@ body.page-inner .hamburger__line {
   }
 
   .hero__banner-wrap {
-    padding-bottom: 2rem;
+    padding: calc(var(--nav-height) + 2rem) 20px 2rem;
+  }
+
+  .hero__title--banner {
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
   }
 
   .hero__actions {
@@ -2749,12 +2728,14 @@ body.page-inner .hamburger__line {
   .stats-float-wrap {
     margin-top: 1.5rem;
     margin-bottom: 0;
+    padding: 0 20px;
   }
 
   .stats-float {
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
     padding: 1.25rem 1rem;
+    border-radius: var(--radius);
   }
 
   .stats-float .stat-item__number,
@@ -2772,8 +2753,21 @@ body.page-inner .hamburger__line {
     padding: 6.5rem 0 3.5rem;
   }
 
+  .plan-journey__header {
+    padding: 0 4px;
+  }
+
+  .plan-journey__title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .plan-journey__subtext {
+    font-size: 0.875rem;
+  }
+
   .plan-journey-form {
     padding: 1.25rem 1rem;
+    border-radius: var(--radius);
   }
 
   .plan-journey__fields {
@@ -2786,13 +2780,31 @@ body.page-inner .hamburger__line {
     justify-content: center;
   }
 
-  /* ── GRIDS ── */
+  /* ── PACKAGE CARDS ── */
   .packages-grid {
+    grid-template-columns: 1fr;
     max-width: 100%;
+    gap: 1rem;
   }
 
   .package-card {
     padding: 1.75rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .package-card__price strong {
+    font-size: 1.4rem;
+  }
+
+  .package-card__title {
+    font-size: 1rem;
+  }
+
+  .package-card__meta,
+  .facility {
+    font-size: 0.7rem;
   }
 
   .package-badge,
@@ -2803,27 +2815,127 @@ body.page-inner .hamburger__line {
     max-width: 100%;
   }
 
+  .package-includes {
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
   .book-package-btn,
   .btn--full {
     min-height: 48px;
   }
 
+  /* ── FEATURE TILES ── */
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
+  .feature-tile {
+    padding: 1.5rem;
+  }
+
+  .feature-tile__icon {
+    font-size: 1.6rem;
+  }
+
+  .feature-tile__title {
+    font-size: 0.875rem;
+  }
+
+  .feature-tile__desc {
+    font-size: 0.7rem;
+  }
+
+  /* ── MISSION CARDS ── */
+  .mission-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .mission-card {
+    padding: 1.5rem;
+  }
+
+  .mission-card__icon {
+    font-size: 1.6rem;
+  }
+
+  /* ── DESTINATION TILES ── */
   .destinations-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
 
+  [data-page="ziyarat"] .destinations-grid {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* ── PROCESS STEPS ── */
   .process-steps {
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
 
+  .process-step__number {
+    font-size: 2.2rem;
+  }
+
+  .process-step__content {
+    padding: 1.25rem;
+  }
+
+  .process-step__title {
+    font-size: 0.875rem;
+  }
+
+  .process-step__desc {
+    font-size: 0.7rem;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 100%;
+  }
+
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+
+  .testimonial-card__text {
+    font-size: 0.75rem;
+  }
+
+  .testimonial-card__author {
+    font-size: 0.7rem;
+  }
+
+  /* ── FORMS ── */
   .form-grid {
     grid-template-columns: 1fr;
     gap: 0.875rem;
+  }
+
+  .form-section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-info__list {
+    gap: 1.25rem;
   }
 
   /* ── TRAVEL CARDS ── */
@@ -2876,17 +2988,33 @@ body.page-inner .hamburger__line {
     gap: 1rem;
   }
 
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    padding: 3rem 0;
+  }
+
+  .cta-banner__title {
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+  }
+
+  .cta-banner__text {
+    font-size: 0.9rem;
+    padding: 0 8px;
+  }
+
   /* ── UMRAH — SERVICES ROW ── */
   .services__row {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
   }
 
   .services__row-img {
-    margin-top: 1.25rem;
+    margin-top: 0;
   }
 
   .services__row-img img {
-    height: 130px;
+    height: 180px;
   }
 
   .services__list {
@@ -2898,7 +3026,7 @@ body.page-inner .hamburger__line {
   .svc-card__heading h3 {
     font-size: 1rem;
     font-weight: 700;
-    line-height: 3;
+    line-height: 2;
   }
 
   .services__row-icon-row .material-symbols-outlined,
@@ -2912,7 +3040,15 @@ body.page-inner .hamburger__line {
     font-size: 0.75rem;
   }
 
+  .services__row-desc {
+    font-size: 0.875rem;
+  }
+
   /* ── UMRAH — HOTEL BLOCK ── */
+  .hotel-block {
+    margin: 1.5rem 0;
+  }
+
   .hotel-stays {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -2920,6 +3056,8 @@ body.page-inner .hamburger__line {
 
   .hotel-stay {
     padding: 14px 16px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .hotel-stay strong {
@@ -2948,6 +3086,8 @@ body.page-inner .hamburger__line {
 
   .svc-card {
     padding: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .svc-card__img {
@@ -2956,21 +3096,43 @@ body.page-inner .hamburger__line {
     margin-bottom: 1rem;
   }
 
+  /* ── BUTTONS ── */
+  .btn {
+    font-size: 0.8125rem;
+    padding: 0.75rem 1.4rem;
+  }
+
   /* ── FOOTER ── */
+  .footer {
+    padding-top: 3rem;
+  }
+
   .footer__grid {
     grid-template-columns: 1fr;
     gap: 1.75rem;
-  }
-
-  .footer {
-    padding-top: 3rem;
   }
 
   .footer__logo-img {
     height: 38px;
   }
 
+  .footer__tagline {
+    font-size: 0.7rem;
+  }
+
+  .footer__links li {
+    font-size: 0.7rem;
+  }
+
+  .footer__heading {
+    font-size: 0.65rem;
+  }
+
   /* ── MODAL ── */
+  .modal {
+    padding: 1rem;
+  }
+
   .modal__dialog {
     padding: 1.5rem 1.25rem;
     max-height: 95vh;
@@ -2997,7 +3159,8 @@ body.page-inner .hamburger__line {
 
 @media (max-width: 375px) {
   .container {
-    padding: 0.5rem;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .section {
     padding: 3rem 0;
@@ -3009,7 +3172,7 @@ body.page-inner .hamburger__line {
     font-size: clamp(1.4rem, 3vw, 2rem);
   }
   .package-card {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   .package-card__price strong {
     font-size: 1.5rem;
@@ -3039,10 +3202,35 @@ body.page-inner .hamburger__line {
     height: 90px;
   }
   .services__row-img img {
-    height: 110px;
+    height: 150px;
   }
   .services__list {
     grid-template-columns: 1fr;
+  }
+  .stats-float-wrap {
+    padding: 0 16px;
+  }
+  .hero__banner-wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .plan-journey-form {
+    padding: 1rem 0.875rem;
+  }
+  .feature-tile {
+    padding: 1.25rem;
+  }
+  .mission-card {
+    padding: 1.25rem;
+  }
+  .testimonial-card {
+    padding: 1.25rem;
+  }
+  .svc-card {
+    padding: 1rem;
+  }
+  .package-includes {
+    padding: 1.25rem;
   }
 }
 
@@ -3052,7 +3240,7 @@ body.page-inner .hamburger__line {
 
 @media (min-width: 376px) and (max-width: 430px) {
   .container {
-    padding: 0 1.25rem;
+    padding: 0 20px;
   }
   .section {
     padding: 3.5rem 0;
@@ -3070,12 +3258,14 @@ body.page-inner .hamburger__line {
     width: 88%;
   }
   .tcarousel__track {
-  min-height: 250px;
-}
-
-.tcarousel__controls {
-  margin-top: 0.25rem;
-}
+    min-height: 250px;
+  }
+  .tcarousel__controls {
+    margin-top: 0.25rem;
+  }
+  .services__row-img img {
+    height: 160px;
+  }
 }
 
 /* ==========================================================================
@@ -3099,5 +3289,13 @@ body.page-inner .hamburger__line {
   }
   .svc-card__img {
     height: 120px;
+  }
+  .services__row-img img {
+    height: 180px;
+  }
+  .packages-grid {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
