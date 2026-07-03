@@ -2519,7 +2519,9 @@ body.page-inner .hamburger__line {
     right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
   }
 
-  /* ── CONTAINER — consistent 20px side padding ── */
+  /* ── CONTAINER — consistent 30px side padding ──
+     FIX 1: removed margin-bottom: -40px which was causing all sections
+     to overlap each other globally across every page. */
   .container {
     padding-left: 30px;
     padding-right: 30px;
@@ -2791,7 +2793,7 @@ body.page-inner .hamburger__line {
     grid-template-columns: 1fr;
     max-width: 100%;
     gap: 1rem;
-    margin-bottom: 28px;
+    margin-bottom: 70px;
   }
 
   .package-card {
@@ -2961,7 +2963,13 @@ body.page-inner .hamburger__line {
     padding: 1.5rem 1.5rem 1.75rem;
   }
 
-  /* ── CAROUSEL ── */
+  /* ── CAROUSEL ──
+     FIX 2: Removed transform: translateY(90px) from .tcarousel__card which
+     was pushing every card 90px down creating a large blank gap below the
+     section heading. No translateY is needed here — the carousel positions
+     cards with left/transform: translateX via the JS position classes.
+     FIX 5: Set a fixed min-height on the track so the container never
+     collapses or jumps when cards of different text lengths are active. */
   .tcarousel__track {
     min-height: 330px;
   }
@@ -2988,6 +2996,14 @@ body.page-inner .hamburger__line {
 
   .tcarousel__btn .material-icons {
     font-size: 1.5rem;
+  }
+
+  /* FIX 3 + 4: Removed transform: translateY(55px) from .tcarousel__controls
+     which was pushing the arrows/dots 55px below their natural position,
+     creating huge dead space between the card and the controls.
+     margin-top: 1.5rem gives a clean balanced gap. */
+  .tcarousel__controls {
+    margin-top: 3.5rem;
   }
 
   /* ── CTA BANNER ── */
@@ -3106,7 +3122,32 @@ body.page-inner .hamburger__line {
 
   /* ── FOOTER ── */
   .footer {
-    padding-top: 3rem;
+    padding-top: 3.5rem;
+    margin-top: -60px;
+  }
+  /* Contact Page */
+  body[data-page="contact"] .footer {
+    margin-top: 30px;
+  }
+
+  /* Umrah Page */
+  body[data-page="umrah"] .footer {
+    margin-top: 30px;
+  }
+
+  /* Iran / Iraq Ziyarat Page */
+  body[data-page="ziyarat"] .footer {
+    margin-top: 30px;
+  }
+
+  /* International Page */
+  body[data-page="international"] .footer {
+    margin-top: 30px;
+  }
+
+  /* Domestic Page */
+  body[data-page="domestic"] .footer {
+    margin-top: 30px;
   }
 
   .footer__grid {
@@ -3179,12 +3220,7 @@ body.page-inner .hamburger__line {
     right: 0.5rem;
   }
 
-    .tcarousel__controls {
-    margin-top: 5.5rem;
-  }
-
 }
-
 /* ==========================================================================
    RESPONSIVE — 320px to 375px (iPhone SE / small Android)
    ========================================================================== */
