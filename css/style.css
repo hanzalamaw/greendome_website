@@ -1685,6 +1685,10 @@ body.page-inner .hamburger__line {
   color: var(--gold);
 }
 
+.testimonial-card__stars .material-icons.star-empty {
+  color: #d6d0c4;
+}
+
 .testimonial-card__text {
   font-size: 0.9375rem;
   color: var(--text-secondary);
