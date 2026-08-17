@@ -193,7 +193,7 @@ python -m http.server 8080
 | Triple Sharing | 305,000 |
 | Double Sharing | 355,000 |
 
-**Departure:** 27th June, 2026 *(Tentative)*
+**Departure:** 15th September, 2026 *(Tentative)*
 
 Full inclusions (flights, visa, Voco Makkah, ODST Madinah, ziyarat, group leader, and more) are listed on the [Umrah page](umrah.html).
 

@@ -213,6 +213,91 @@ function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function formLoaderMarkup() {
+  return `
+    <div class="form-loader" role="status" aria-live="polite">
+      <p class="form-loader__label">Sending your inquiry</p>
+      <p class="form-loader__sub">Please wait while we send your details</p>
+      <div class="form-loader__bar">
+        <div class="form-loader__track">
+          <div class="form-loader__fill"></div>
+        </div>
+        <span class="form-loader__plane" aria-hidden="true">
+          <span class="material-icons">flight</span>
+        </span>
+      </div>
+      <p class="form-loader__pct"><span class="form-loader__pct-num">1</span>%</p>
+    </div>
+  `;
+}
+
+function setFormLoaderProgress(form, pct) {
+  const value = Math.max(1, Math.min(100, Math.round(pct)));
+  form._loaderPct = value;
+  const fill = form.querySelector(".form-loader__fill");
+  const plane = form.querySelector(".form-loader__plane");
+  const num = form.querySelector(".form-loader__pct-num");
+  if (fill) fill.style.width = `${value}%`;
+  if (plane) plane.style.left = `${value}%`;
+  if (num) num.textContent = String(value);
+}
+
+function animateFormLoader(form, from, to, duration) {
+  return new Promise((resolve) => {
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - (1 - t) * (1 - t);
+      setFormLoaderProgress(form, from + (to - from) * eased);
+      if (t < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        setFormLoaderProgress(form, to);
+        resolve();
+      }
+    };
+    requestAnimationFrame(tick);
+  });
+}
+
+function startFormLoaderCreep(form) {
+  stopFormLoaderCreep(form);
+  form._loaderCreeping = true;
+
+  const creep = () => {
+    if (!form._loaderCreeping) return;
+    const current = form._loaderPct || 70;
+    if (current < 95) {
+      setFormLoaderProgress(form, current + 1);
+    }
+    form._loaderCreepTimer = window.setTimeout(creep, 550);
+  };
+
+  form._loaderCreepTimer = window.setTimeout(creep, 500);
+}
+
+function stopFormLoaderCreep(form) {
+  form._loaderCreeping = false;
+  if (form._loaderCreepTimer) {
+    window.clearTimeout(form._loaderCreepTimer);
+    form._loaderCreepTimer = null;
+  }
+}
+
+function showFormLoader(form) {
+  stopFormLoaderCreep(form);
+  form.querySelector(".form-loader")?.remove();
+  form.insertAdjacentHTML("beforeend", formLoaderMarkup());
+  form.classList.add("inquiry-form--loading");
+  setFormLoaderProgress(form, 1);
+}
+
+function hideFormLoader(form) {
+  stopFormLoaderCreep(form);
+  form.classList.remove("inquiry-form--loading");
+  form.querySelector(".form-loader")?.remove();
+}
+
 async function handleFormSubmit(event) {
   event.preventDefault();
 
@@ -253,11 +338,7 @@ async function handleFormSubmit(event) {
   }
 
   submitBtn.disabled = true;
-  if (isBannerForm) {
-    submitBtn.innerHTML = 'Sending...';
-  } else {
-    submitBtn.textContent = "Sending...";
-  }
+  showFormLoader(form);
 
   const travelersValue = isBannerForm
     ? String(travelers)
@@ -274,25 +355,49 @@ async function handleFormSubmit(event) {
     timestamp: new Date().toISOString(),
   };
 
-  try {
+  const sendInquiry = async () => {
     if (GOOGLE_SHEET_URL === "YOUR_APPS_SCRIPT_URL_HERE") {
       await new Promise((resolve) => setTimeout(resolve, 800));
-    } else {
-      const response = await fetch(GOOGLE_SHEET_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.type !== "opaque" && !response.ok) {
-        throw new Error("Request failed");
-      }
+      return;
     }
 
+    const response = await fetch(GOOGLE_SHEET_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.type !== "opaque" && !response.ok) {
+      throw new Error("Request failed");
+    }
+  };
+
+  let sendDone = false;
+  const sendPromise = sendInquiry().then((result) => {
+    sendDone = true;
+    return result;
+  });
+
+  try {
+    await animateFormLoader(form, 1, 70, 1400);
+
+    if (!sendDone) {
+      startFormLoaderCreep(form);
+    }
+
+    await sendPromise;
+    stopFormLoaderCreep(form);
+
+    const current = form._loaderPct || 70;
+    await animateFormLoader(form, current, 100, 500);
+    await new Promise((resolve) => setTimeout(resolve, 280));
+
+    form.classList.remove("inquiry-form--loading");
     form.innerHTML =
       '<div class="form-success"><span class="material-icons" aria-hidden="true">check_circle</span><p>Thank you! We\'ll reach out within 24 hours.</p></div>';
   } catch {
+    hideFormLoader(form);
     errorEl.textContent = "Something went wrong. Please WhatsApp us directly.";
     errorEl.hidden = false;
     submitBtn.disabled = false;
