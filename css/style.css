@@ -1351,6 +1351,189 @@ body.page-inner .hamburger__line {
   color: var(--gold);
 }
 
+.package-card--featured {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2rem 2.5rem;
+  align-items: center;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 2.25rem;
+}
+
+.package-card__featured-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.package-card--featured .package-card__facilities {
+  margin-top: 0;
+}
+
+.hotel-stops {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.hotel-stop .package-card__sharing {
+  margin-bottom: 0.1rem;
+}
+
+.hotel-stop .package-card__title {
+  margin-bottom: 0.15rem;
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+.package-card__hotel-meta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.share-prices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 1rem 0 0.25rem;
+  padding: 0.85rem 1rem;
+  background: var(--off-white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.share-prices__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.share-prices__row strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.share-prices__row strong span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-right: 0.2rem;
+}
+
+.package-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.duration-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.duration-pill {
+  min-height: 44px;
+  padding: 0.55rem 1.35rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.duration-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.duration-pill.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+.package-scroller__nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.package-scroller__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.package-scroller__arrow .material-icons {
+  font-size: 1.4rem;
+}
+
+.package-scroller__next {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+.package-scroller__arrow:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.package-scroller__next:hover:not(:disabled) {
+  background: var(--primary-light);
+  color: var(--white);
+}
+
+.package-scroller__arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.package-scroller__viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.75rem 0.15rem 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dark) transparent;
+}
+
+.package-scroller__track {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.package-scroller__track[hidden] {
+  display: none !important;
+}
+
+.package-scroller__track .package-card {
+  flex: 0 0 calc((100% - 2.5rem) / 3);
+  scroll-snap-align: start;
+  min-width: 260px;
+}
+
 /* ==========================================================================
    FEATURE TILES
    ========================================================================== */
@@ -1995,6 +2178,15 @@ body.page-inner .hamburger__line {
     margin: 0 auto;
   }
 
+  .package-card--featured {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .package-scroller__track .package-card {
+    flex-basis: calc((100% - 1.25rem) / 2);
+  }
+
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2065,6 +2257,19 @@ body.page-inner .hamburger__line {
 
   .section {
     padding: 4rem 0;
+  }
+
+  .package-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .package-scroller__nav {
+    display: none;
+  }
+
+  .package-scroller__track .package-card {
+    flex-basis: 86%;
   }
 
   .travel-partner__header {

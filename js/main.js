@@ -432,6 +432,58 @@ function initTravelPartnerSlider() {
 }
 
 /* ==========================================================================
+   NOVEMBER PACKAGES — duration pills + horizontal cards
+   ========================================================================== */
+function initPackageSwitcher() {
+  document.querySelectorAll("[data-package-switcher]").forEach((root) => {
+    const pills = root.querySelectorAll("[data-duration]");
+    const panels = root.querySelectorAll("[data-duration-panel]");
+    const viewport = root.querySelector(".package-scroller__viewport");
+    const prev = root.querySelector(".package-scroller__prev");
+    const next = root.querySelector(".package-scroller__next");
+    if (!pills.length || !panels.length || !viewport) return;
+
+    const activePanel = () => root.querySelector("[data-duration-panel]:not([hidden])");
+
+    const updateArrows = () => {
+      if (!prev || !next) return;
+      const max = viewport.scrollWidth - viewport.clientWidth;
+      prev.disabled = viewport.scrollLeft <= 4;
+      next.disabled = max <= 4 || viewport.scrollLeft >= max - 4;
+    };
+
+    const scrollByCard = (direction) => {
+      const card = activePanel()?.querySelector(".package-card");
+      if (!card) return;
+      const gap = parseFloat(getComputedStyle(activePanel()).gap) || 20;
+      viewport.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: "smooth" });
+    };
+
+    pills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const duration = pill.dataset.duration;
+        pills.forEach((item) => {
+          const active = item === pill;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-selected", String(active));
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.durationPanel !== duration;
+        });
+        viewport.scrollLeft = 0;
+        requestAnimationFrame(updateArrows);
+      });
+    });
+
+    prev?.addEventListener("click", () => scrollByCard(-1));
+    next?.addEventListener("click", () => scrollByCard(1));
+    viewport.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows, { passive: true });
+    updateArrows();
+  });
+}
+
+/* ==========================================================================
    INIT
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
@@ -445,5 +497,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroInquiryTabs();
   initDestinationTiles();
   initTravelPartnerSlider();
+  initPackageSwitcher();
   initScrollToTop();
 });
